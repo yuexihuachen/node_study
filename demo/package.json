@@ -16,6 +16,11 @@
   "author": "wanglong",
   "license": "ISC",
   "devDependencies": {
-    "fs": "0.0.1-security"
+    "express": "^4.14.0",
+    "fs": "0.0.1-security",
+    "path": "^0.12.7"
+  },
+  "dependencies": {
+    "ejs": "^2.5.5"
   }
 }
