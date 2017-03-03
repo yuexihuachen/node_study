@@ -4,13 +4,16 @@ var path=require('path');
 var app=express();
 
 //放模板文件的目录
- app.set('views', './template');
+ app.set('views', './views');
 //模板引擎
  app.set('view engine','ejs');
  //然后安装相应的模板引擎 npm 软件包。
+ 
+ //方法即可创建一个你自己的模板引擎
+ //app.engine(ext, callback)
 
 app.get("/hello/:who?", function(req, res) {
-    console.log(path);
+    console.log(req.ip,req.files);
     if(req.params.id){
         res.end("hello, "+req.params.who+' .');
     } else {
