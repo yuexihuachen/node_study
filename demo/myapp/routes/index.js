@@ -8,12 +8,13 @@ let router = express.Router();
 router.get('/', function(req, res, next) {
 
   let result={
-    value:2
+    body:'',
+    title:'zishen2b'
   }
 
-  let html=ReactDOMServer.renderToString(<MyComponent  {...result}/>);
-  console.log(html)
-  res.render('index', { title: 'name'});
+  result.body=ReactDOMServer.renderToString(<MyComponent  {...result}/>);
+  //console.log(html)
+  res.render('index', result);
 });
 
 module.exports = router;
