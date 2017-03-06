@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>test</title>
-   <script type="text/javascript" async="" src="./javascripts/index.js"></script>
+    <title><%= title %></title>
+   <script type="text/javascript" async="" src="./bundle/index.js"></script>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
     <%- body %>
+    <div id="root"></div>
+    <script type="text/template" id="item_temp">
+      <%- body %>
+    </script>
   </body>
 </html>
