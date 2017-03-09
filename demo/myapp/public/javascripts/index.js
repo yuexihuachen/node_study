@@ -7,13 +7,25 @@ const rootEl = document.getElementById('root');
 
   let result={
     body:'clinet',
-    title:'clinetaaa'
+    title:'clinet'
   }
 
-render(
-  <Counter {...result} />,
-  rootEl
-);
+  render(
+    <Counter {...result} />,
+    rootEl
+  );
+
+// let root=document.getElementById('item_temp');
+
+// if(root.innerHTML.length>0){
+//   rootEl.innerHTML=root.innerHTML;
+// } else {
+//   render(
+//     <Counter {...result} />,
+//     rootEl
+//   );
+// }
+
 
 
 

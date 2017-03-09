@@ -21744,10 +21744,22 @@ var rootEl = document.getElementById('root');
 
 var result = {
   body: 'clinet',
-  title: 'clinetaaa'
+  title: 'clinet'
 };
 
 (0, _reactDom.render)(_react2.default.createElement(_MyComponent2.default, result), rootEl);
+
+// let root=document.getElementById('item_temp');
+
+// if(root.innerHTML.length>0){
+//   rootEl.innerHTML=root.innerHTML;
+// } else {
+//   render(
+//     <Counter {...result} />,
+//     rootEl
+//   );
+// }
+
 
 // function createCORSRequest(method, url){
 //     var xhr = new XMLHttpRequest();
