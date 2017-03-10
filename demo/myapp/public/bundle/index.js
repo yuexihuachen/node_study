@@ -9464,14 +9464,25 @@ var MyComponent = function (_React$Component) {
   }
 
   _createClass(MyComponent, [{
-    key: 'render',
+    key: "handleClick",
+    value: function handleClick(e) {
+      console.log(e.currentTarget);
+    }
+  }, {
+    key: "imageError",
+    value: function imageError(e) {
+      e.currentTarget.src = "http://dimg04.c-ctrip.com/images/700d09000000487lhEA93_480_96_21.jpg";
+    }
+  }, {
+    key: "render",
     value: function render() {
       var t = this.props;
       return React.createElement(
-        'div',
-        null,
-        'Hello World  ',
-        t.title
+        "div",
+        { onClick: this.handleClick },
+        "Hello World  ",
+        t.title,
+        React.createElement("img", { src: "https://10.2.6.249/images/30030b000000018sf3AA6.png", onError: this.imageError, alt: "" })
       );
     }
   }]);
