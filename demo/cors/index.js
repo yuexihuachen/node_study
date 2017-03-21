@@ -49,13 +49,13 @@ function createCORSRequest(method, url){
     //如果要把Cookie发到服务器，一方面要服务器同意，指定Access-Control-Allow-Credentials字段。
     xhr.setRequestHeader('Access-Control-Allow-Credentials', 'true');
     //发送一个自定义头信息X-Custom-Header。
-    xhr.setRequestHeader('X-Custom-Header', 'value');
+    //xhr.setRequestHeader('X-Custom-Header', 'value');
     //该字段可选。CORS请求时，XMLHttpRequest对象的getResponseHeader()方法只能拿到6个基本字段：
     //Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma。
     //如果想拿到其他字段，就必须在Access-Control-Expose-Headers里面指定。
     //上面的例子指定，getResponseHeader('FooBar')可以返回FooBar字段的值。
     //该字段是一个逗号分隔的字符串，指定浏览器CORS请求会额外发送的头信息字段，上例是X-Custom-Header。
-    xhr.setRequestHeader('Access-Control-Expose-Headers', 'FooBar');
+    //xhr.setRequestHeader('Access-Control-Expose-Headers', 'FooBar');
 
 
     //非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为"预检"请求（preflight）。
@@ -65,7 +65,7 @@ function createCORSRequest(method, url){
     //"预检"请求用的请求方法是OPTIONS，表示这个请求是用来询问的。头信息里面，关键字段是Origin，表示请求来自哪个源。
     //除了Origin字段，"预检"请求的头信息包括两个特殊字段。
     //该字段是必须的，用来列出浏览器的CORS请求会用到哪些HTTP方法，上例是PUT。
-    xhr.setRequestHeader('Access-Control-Request-Method', 'GET,POST');
+    //xhr.setRequestHeader('Access-Control-Request-Method', 'POST');
 
 
 

@@ -1,6 +1,7 @@
 var webpack=require('webpack');
 
 module.exports = {
+  devtool: 'eval-source-map',
   entry: './public/javascripts/index.js',
   output: {
     path: __dirname+'/public/bundle/',

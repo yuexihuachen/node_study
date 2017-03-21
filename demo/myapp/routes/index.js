@@ -1,20 +1,22 @@
 import express from 'express';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import MyComponent from '../components/MyComponent';
+
+import Counter from '../components/Counter';
+import defaults from '../config/defaults';
+import json from '../json/index.json';
 
 let router = express.Router();
 
 router.get('/', function(req, res, next) {
 
-  let result={
-    body:'server',
-    title:'server'
-  }
+  defaults.body=ReactDOMServer.renderToStaticMarkup(<Counter  {...json}/>);
+  defaults.title='server';
+  defaults.content="server";
+  defaults.initScript='./bundle/index.js?v=20173211703';
 
-  result.body=ReactDOMServer.renderToString(<MyComponent  {...result}/>);
+  res.render('layout', { data:defaults });
 
-  res.render('index', result);
 });
 
 module.exports = router;
