@@ -90,6 +90,8 @@ body {
 
 .icon{
     position:absolute;
+    left: 10px;
+    bottom:10px;
     height: 20px;
     width: 80px;
     line-height: 20px;
@@ -108,6 +110,11 @@ body {
     line-height: 17px;
     font-weight: 400;
     height: 34px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 }
 
 .price {
@@ -126,7 +133,6 @@ body {
 
 .name{
     height: 20px;
-    max-width: 60%;
     overflow: hidden;
     margin-right: 10px;
     color: #333;

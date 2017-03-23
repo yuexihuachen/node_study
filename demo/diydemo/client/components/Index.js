@@ -7,10 +7,9 @@ class Counter extends React.Component {
   handleClickAdd(e){
     console.log('add')
   }
-  toDetail(){
-    var id=this.refs.productInfo.dataset.pid;
-    console.log(this.refs.productInfo)
-    window.location.href="./detail?id="+id;
+  toDetail(e){
+    var target=e.currentTarget.dataset;
+    window.location.href="./detail?id="+target.pid+'&poid='+target.poid+'&aid='+target.aid;
   }
   render() {
     //const data=this.props.product;
@@ -31,7 +30,7 @@ class Counter extends React.Component {
         <div className="content">
            {
                data.map((item,key)=>{
-                 return <div className="proditem" key={key} ref="productInfo" data-pid={item.advisorId} onClick={this.toDetail.bind(this)}>
+                 return <div className="proditem" key={key} data-aid={item.advisorId} data-pid={item.productId} data-poid={item.poid} onClick={this.toDetail.bind(this)}>
                    <div className="imgContent">
                       <img style={{width:'80px',height:'80px'}} src={item.imgUrl} alt="" />
                       <span className="icon">{bookingdes[item.resourceType-1]}</span>

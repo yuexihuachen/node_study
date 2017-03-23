@@ -4,6 +4,7 @@ import ReactDOMServer from 'react-dom/server';
 
 import Detail from '../client/components/Detail';
 import defaults from '../config/defaults';
+import services from '../models/services';
 import json from '../json/index.json';
 
 let router = express.Router();
@@ -11,24 +12,33 @@ let router = express.Router();
 router.get('/', function(req, res, next) {
   var params=req.query || '';
 
-  var singProduct=json.product.filter((item)=>{
-    return item.id==params.id;
-  })
+  console.log(params)
+ var detailData=  services.fetchData({
+    method:'POST',
+    headers:{},
+    data:{
+      goodsLimit:{productIds:[parseInt(params.id,10)]},
+      guideLimit:{"advisorIds":[parseInt(params.aid,10)],"ageTag":[],"onlyThesePoi":true},
+      poid:parseInt(params.poid,10),
+      resType:[],
+      searchType:3
+    },
+    url:'http://m.ctrip.com/restapi/soa2/12568/search.json'
+  });
 
-  
-  var data={
-    "product":singProduct
-  }
-  
-  console.log(req.baseUrl)
-  defaults.body=ReactDOMServer.renderToStaticMarkup(<Detail  {...data}/>);
+Promise.all([detailData]).then(function(results) {
+      defaults.body=ReactDOMServer.renderToStaticMarkup(<Detail  {...results[0]}/>);
+      defaults.title='detail';
+      defaults.content="detail";
+      defaults.initScript='./bundle/detail.js?v=20173211703';
+      defaults.initStyles='/stylesheets/detailStyle.css?v='+new Date().getTime();
 
-  defaults.title='detail';
-  defaults.content="detail";
-  defaults.initScript='./bundle/detail.js?v=20173211703';
+      res.render('layout', { data:defaults });
+})
+.catch(function(error) {
+ // One or more promises was rejected
+});
 
-
-  res.render('layout', { data:defaults });
 
 });
 

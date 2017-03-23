@@ -20,13 +20,12 @@ xcors.execute({
   params:{
     goodsLimit:{sort: 0, imageWidth: 160, imageHeight: 160},
     pageIndex:1,
-    pageSize:10,
+    pageSize:50,
     poid:2,
     resType:[1,2,3,4,5,6,7,8],
     searchType:2
   },
   onComplete:function(data){
-    console.log(data)
     rend(data)
   },
   onError:function(err){
