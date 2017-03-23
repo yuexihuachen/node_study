@@ -2,7 +2,7 @@ import express from 'express';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
-import Counter from '../components/Counter';
+import Detail from '../client/components/Detail';
 import defaults from '../config/defaults';
 import json from '../json/index.json';
 
@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
   }
   
   console.log(req.baseUrl)
-  defaults.body=ReactDOMServer.renderToStaticMarkup(<Counter  {...data}/>);
+  defaults.body=ReactDOMServer.renderToStaticMarkup(<Detail  {...data}/>);
 
   defaults.title='detail';
   defaults.content="detail";

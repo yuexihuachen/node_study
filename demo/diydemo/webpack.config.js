@@ -1,10 +1,14 @@
 var webpack=require('webpack');
 
 module.exports = {
-  entry: './client/javascripts/index.js',
+  devtool: 'eval-source-map',
+    entry: {
+    'index':'./client/javascripts/index.js',
+    'detail':'./client/javascripts/detail.js'
+  },
   output: {
     path: __dirname+'/public/bundle/',
-    filename: 'index.js'
+    filename: '[name].js'
   },
   module: {
     loaders:[

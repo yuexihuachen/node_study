@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
   defaults.title='server';
   defaults.content="server";
   defaults.initScript='./bundle/index.js?v=20173211703';
-
+  console.log(req.baseUrl)
   res.render('layout', { data:defaults });
 
 });

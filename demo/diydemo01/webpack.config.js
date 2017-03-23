@@ -5,6 +5,7 @@ module.exports = {
   entry: {
     'index':'./client/javascripts/index.js',
     'users':'./client/javascripts/users.js',
+    'detail':'./client/javascripts/detail.js'
   },
   output: {
     path: __dirname+'/public/bundle/',
