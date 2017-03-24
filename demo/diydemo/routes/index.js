@@ -17,7 +17,7 @@ var indexData=  services.fetchData({
     data:{
       goodsLimit:{sort: 0, imageWidth: 160, imageHeight: 160},
       pageIndex:1,
-      pageSize:50,
+      pageSize:10,
       poid:2,
       resType:[1,2,3,4,5,6,7,8],
       searchType:2
@@ -32,7 +32,7 @@ Promise.all([indexData]).then(function(results) {
       defaults.content="server";
       defaults.initScript='./bundle/index.js?v=20173211703';
       defaults.initStyles='/stylesheets/indexStyle.css?v='+new Date().getTime();
-
+      defaults.delegate=null;
       res.render('layout', { data:defaults });
 })
 .catch(function(error) {
