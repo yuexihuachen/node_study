@@ -2,9 +2,8 @@ var webpack=require('webpack');
 
 module.exports = {
   devtool: 'eval-source-map',
-  entry: {
+    entry: {
     'index':'./client/javascripts/index.js',
-    'users':'./client/javascripts/users.js',
     'detail':'./client/javascripts/detail.js'
   },
   output: {

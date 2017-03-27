@@ -1,22 +1,24 @@
 import express from 'express';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import MyComponent from '../client/components/MyComponent';
+
+import Index from '../client/components/Index';
+import defaults from '../config/defaults';
+import services from '../models/services';
+import json from '../json/index.json';
 
 let router = express.Router();
 
 router.get('/', function(req, res, next) {
 
-  let other=function(){};
-  let result={
-    nums:0,
-    onIncrement:other,
-    onDecrement:other
-  }
+      defaults.body=ReactDOMServer.renderToStaticMarkup(<Index  />);
+      defaults.title='server';
+      defaults.content="server";
+      defaults.initScript='./bundle/index.js?v=20173211703';
+      defaults.initStyles='/stylesheets/indexStyle.css?v='+new Date().getTime();
+      defaults.delegate=null;
+      res.render('layout', { data:defaults });
 
-  result.body=ReactDOMServer.renderToString(<MyComponent  {...result}/>);
-
-  res.render('index', result);
 });
 
 module.exports = router;

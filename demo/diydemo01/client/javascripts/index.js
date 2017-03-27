@@ -1,39 +1,24 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { createStore,applyMiddleware } from 'redux';
-import { Provider } from 'react-redux'
-import createLogger from 'redux-logger'
-import thunk from 'redux-thunk'
 
-import reducer from '../reducers/index'
-import Counter from '../components/MyComponent';
-import basicview from '../res/scripts/basic/basicView';
-import * as actions from '../actions/index'
-
-const middleware = [ thunk ];
-if (process.env.NODE_ENV !== 'production') {
-  middleware.push(createLogger());
-}
-
-const store = createStore(
-  reducer,
-  applyMiddleware(...middleware)
-)
+import Index from '../components/Index';
+import json from '../../json/index.json';
+import xcors from '../util/xcors';
 
 const rootEl = document.getElementById('root');
+const tpl=document.getElementById('loadingTmpl');
+var baseView={};
 
-
-const rende=()=>{
+baseView.rend=function(){
     render(
-      <Counter  
-      value={store.getState()}
-      onIncrement={()=>{ store.dispatch(actions.toAdd('add')) }}
-      onDecrement={()=>{store.dispatch(actions.toDec('dec'))}}
-      />,
-    rootEl
-  )
+      <Index  />,
+      rootEl
+    );
+
 }
 
+baseView.rend()
 
-rende()
-store.subscribe(rende)
+
+
+

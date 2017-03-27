@@ -1,0 +1,101 @@
+body {
+  padding: 0;
+  margin: 0;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.cbody {
+    margin: 0 auto;
+}
+
+.header{
+  width:100%;
+  display: flex;
+  justify-content: flex-start;
+  background-color: #333;
+  height: 44px;
+  color: #fff;
+  align-items: center;
+  font-size: 18px;
+}
+
+.back{
+  width:50px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cback{
+  width:8px;
+  height: 8px;
+  transform:rotate(45deg);
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+}
+
+
+.back:hover{
+  background-color: #000;
+}
+
+.home{
+  width:50px;
+  height: 44px;
+  display: flex;
+  flex-flow: column  wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.chometop {
+
+}
+
+.chomecon{
+
+}
+
+.headcenter{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+
+.titles {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #333;
+  height: 60px;
+}
+
+.titles li{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:62px;
+  height: 60px;
+}
+
+.titles li:hover{
+  background-color: #000;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+
+
+.content {
+  width: 100%;  
+  height: auto;
+}
+
