@@ -10,6 +10,10 @@ var Tab = require('react-bootstrap').Tab;
 var Table = require('react-bootstrap').Table;
 var Checkbox = require('react-bootstrap').Checkbox;
 
+var BrowserRouter  = require('react-router-dom').BrowserRouter;
+var Route = require('react-router-dom').Route;
+var Link = require('react-router-dom').Link;
+
 
 
 class ProductComponent extends React.Component {
@@ -87,34 +91,39 @@ class ProductComponent extends React.Component {
         </Tabs>
         <hr />
           <Table striped bordered condensed hover>
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Username</th>
-      </tr>
-    </thead>
-    <tbody>
-      {
-        tabData.map((item,index)=>{
-          return (<tr key={index}>
-                  <td>
-                    <Checkbox data-id={index} validationState="success"></Checkbox></td>
-                  <td>{item.Firstname}</td>
-                  <td>{item.Lastname}</td>
-                  <td>{item.Username}</td>
-                </tr>)
-        })
-      }
-    </tbody>
-  </Table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Username</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                tabData.map((item,index)=>{
+                  return (<tr key={index}>
+                          <td>
+                            <Checkbox data-id={index} validationState="success"></Checkbox></td>
+                          <td>{item.Firstname}</td>
+                          <td>{item.Lastname}</td>
+                          <td>{item.Username}</td>
+                        </tr>)
+                })
+              }
+            </tbody>
+          </Table>
+          <hr />
+
+
 
         </div> 
       </div>
     )
   }
 }
+
+
 
 class ProductContentList extends React.Component {
   constructor(props){
