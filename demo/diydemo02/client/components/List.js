@@ -13,7 +13,9 @@ class ProductComponent extends React.Component {
       console.log(e.currentTarget)
   }
   render(){
+      console.log(require('react-bootstrap'))
       var tabData=this.props.goodsGroup.goodsList;
+      const tabName=["#","产品id","产品名称","用户昵称","用户名","性别","评分","价格","销量","城市"]
     return (
         <div style={{width:"100%",display:"flex",flexFlow:"row wrap",justifyContent:"center",height:"60px",alignItems:"center"}}>
           <div style={{fontWeight:"bold",fontSize:"20px"}}>Component</div>
@@ -21,16 +23,9 @@ class ProductComponent extends React.Component {
           <Table striped bordered condensed hover>
             <thead>
               <tr>
-                <th>#</th>
-                <th>产品id</th>
-                <th>产品名称</th>
-                <th>用户昵称</th>
-                <th>用户名</th>
-                <th>性别</th>
-                <th>评分</th>
-                <th>价格</th>
-                <th>销量</th>
-                <th>城市</th>
+                  {
+                      tabName.map((item,index)=><th key={index}>{item}</th>)
+                  }
               </tr>
             </thead>
             <tbody>

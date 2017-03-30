@@ -17,6 +17,7 @@ class Layout extends React.Component {
 
             <link rel="stylesheet" href={this.props.data.initStyles} />
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css" />
+             <link rel="stylesheet" href="/stylesheets/daterangepicker.css?v=1490866882860" />
             <script type="text/javascript" async="" src={this.props.data.initScript}></script>
             <script dangerouslySetInnerHTML={{__html:`  
             var script = document.createElement("script");

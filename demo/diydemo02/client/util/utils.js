@@ -6,6 +6,9 @@ utils.GetQueryString=function(name){
      if(r!=null)return  unescape(r[2]); return null;
 }
 
+utils.ChoiceCalendar=function(el,opts,callback){
+           
+}
 
 
 module.exports=utils;
