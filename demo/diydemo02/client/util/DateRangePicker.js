@@ -1,7 +1,35 @@
-    var moment = require('moment');
-
+/**
+* @version: 2.1.25
+* @author: Dan Grossman http://www.dangrossman.info/
+* @copyright: Copyright (c) 2012-2017 Dan Grossman. All rights reserved.
+* @license: Licensed under the MIT license. See http://www.opensource.org/licenses/mit-license.php
+* @website: http://www.daterangepicker.com/
+*/
+// Follow the UMD template https://github.com/umdjs/umd/blob/master/templates/returnExportsGlobal.js
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Make globaly available as well
+        define(['moment', 'jquery'], function (moment, jquery) {
+            return (root.daterangepicker = factory(moment, jquery));
+        });
+    } else if (typeof module === 'object' && module.exports) {
+        // Node / Browserify
+        //isomorphic issue
+        var jQuery = (typeof window != 'undefined') ? $ : undefined;
+        if (!jQuery) {
+            jQuery = require('jquery');
+            if (!jQuery.fn) jQuery.fn = {};
+        }
+        var moment = (typeof window != 'undefined' && typeof window.moment != 'undefined') ? window.moment : require('moment');
+        module.exports = factory(moment, jQuery);
+    } else {
+        // Browser globals
+        root.daterangepicker = factory(root.moment, root.jQuery);
+    }
+}(this, function(moment, $) {
     var DateRangePicker = function(element, options, cb) {
 
+        //default settings for options
         this.parentEl = 'body';
         this.element = element;
         this.startDate = moment().startOf('day');
@@ -25,12 +53,10 @@
         this.ranges = {};
 
         this.opens = 'right';
-        if (this.element.hasClass('pull-right'))
-            this.opens = 'left';
+      
 
         this.drops = 'down';
-        if (this.element.hasClass('dropup'))
-            this.drops = 'up';
+
 
         this.buttonClasses = 'btn btn-sm';
         this.applyClass = 'btn-success';
@@ -62,7 +88,9 @@
 
         //allow setting options with data attributes
         //data-api options will be overwritten with custom javascript options
-        options = $.extend(this.element.data(), options);
+        //options = $.extend(this.element.data(), options);
+        options=options;
+        this.element.data(options);
 
         //html template for the picker UI
         if (typeof options.template !== 'string' && !(options.template instanceof $))
@@ -753,6 +781,7 @@
             for (var row = 0; row < 6; row++) {
                 html += '<tr>';
 
+                
                 // add week number
                 if (this.showWeekNumbers)
                     html += '<td class="week">' + calendar[row][0].week() + '</td>';
@@ -784,14 +813,17 @@
                         classes.push('off', 'disabled');
 
                     //don't allow selection of date if a custom function decides it's invalid
+                    
                     if (this.isInvalidDate(calendar[row][col]))
                         classes.push('off', 'disabled');
 
                     //highlight the currently selected start date
+                   
                     if (calendar[row][col].format('YYYY-MM-DD') == this.startDate.format('YYYY-MM-DD'))
                         classes.push('active', 'start-date');
 
                     //highlight the currently selected end date
+                     
                     if (this.endDate != null && calendar[row][col].format('YYYY-MM-DD') == this.endDate.format('YYYY-MM-DD'))
                         classes.push('active', 'end-date');
 
@@ -1584,4 +1616,16 @@
 
     };
 
-    module.exports=DateRangePicker;
+    $.fn.daterangepicker = function(options, callback) {
+        this.each(function() {
+            var el = $(this);
+            if (el.data('daterangepicker'))
+                el.data('daterangepicker').remove();
+            el.data('daterangepicker', new DateRangePicker(el, options, callback));
+        });
+        return this;
+    };
+
+    return DateRangePicker;
+
+}));

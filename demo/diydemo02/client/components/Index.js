@@ -1,33 +1,39 @@
 var React = require('react');
+
 var calendar  = require('../util/calendar');
 var Header  = require('./Header');
+var Can=require('./Calendar');
 
 class ProductComponent extends React.Component {
   constructor(props){
       super(props);
   }
   componentDidMount(){
-    console.log(this.refs.dateinput)
-    console.log(calendar())
+    var date=new Date();
+    this.setState({
+      calendar_params:{
+        year:date.getFullYear(),
+        month:(date.getMonth()+1)
+      }
+    })
+
   }
   render(){
-
     return (
         <div style={{width:"100%",fontWeight:"bold",fontSize:"20px"}}>
           <div style={{fontWeight:"bold",fontSize:"20px"}}>Component</div>
           <hr />
+          <Can data={this.state && this.state.calendar_params}/>
+          <hr />
           <div style={{margin:"0 auto",width:"255px"}}>
                 <input type='text' ref="dateinput"  className="form-control" />
           </div>
-             <hr />
-             <div className="daterangepicker dropdown-menu ltr single opensright show-calendar" style={{top: "331px", left: "173px", right: "auto",display:"block"}}>
+          <hr />
+             <div className="daterangepicker dropdown-menu ltr single opensright show-calendar" style={{top: "401px", left: "173px", right: "auto",display:"block"}}>
                 <div className="calendar left single">
                   <div className="calendar-table" dangerouslySetInnerHTML={{__html:calendar()}}></div>
                 </div>
              </div>
-             
-
-             
         </div>
     )
   }
