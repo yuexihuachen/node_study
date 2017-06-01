@@ -1,4 +1,5 @@
-var React = require('react');
+import React from 'react';
+import PropTypes from 'prop-types';
 
 class Layout extends React.Component {
   render() {
@@ -27,7 +28,7 @@ class Layout extends React.Component {
 }
 
 Layout.propTypes = {
-  title: React.PropTypes.string
+  data: PropTypes.object.isRequired
 };
 
 

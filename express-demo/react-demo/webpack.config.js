@@ -3,15 +3,15 @@ var webpack = require('webpack');
 
 module.exports = {
   //entry: './public/client/index.js',
-  entry:{
-    app: './public/client/index.js',
-    vendor: ['react','react-dom']
+  entry:{//入口文件
+    app: './public/client/index.js',//应用程序
+    vendor: ['react','react-dom']//公共库
   },
-  output: {
+  output: {//输出
     path: __dirname+'/public/bundle/',
     filename: '[name].js'
   },
-   plugins: [
+   plugins: [//插件
      new webpack.DefinePlugin({
         'process.env':{
           'NODE_ENV': JSON.stringify('production')
@@ -33,9 +33,9 @@ module.exports = {
   ],
   resolve: {
     extensions: ['.ts', '.js', '.json'],
-    modules: [path.join(__dirname, 'node_modules')]
+    modules: [path.join(__dirname, 'node_modules')]//webpackage解析模块时应该搜索哪些目录
   },
-  module: {
+  module: {//模块
     loaders: [
       {
         test: /\.js$/,
