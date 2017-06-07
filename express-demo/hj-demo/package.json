@@ -11,7 +11,7 @@
     "build": "babel src -d lib",
     "test": "./node_modules/.bin/webpack --colors --profile --display-modules",
     "test:watch": "./node_modules/.bin/webpack --watch",
-    "debug":"node ./bin/www DEBUG=*"
+    "debug": "node ./bin/www DEBUG=*"
   },
   "dependencies": {
     "body-parser": "~1.16.0",
@@ -34,6 +34,7 @@
     "babel-preset-stage-0": "^6.22.0",
     "compression-webpack-plugin": "^0.4.0",
     "express-react-views": "^0.10.2",
+    "isomorphic-fetch": "^2.2.1",
     "node-import": "^0.9.2",
     "preact": "^8.1.0",
     "prop-types": "^15.5.8",

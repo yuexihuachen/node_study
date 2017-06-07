@@ -1,5 +1,4 @@
-const INCREASE = 'INCREASE'
-const DECREASE = 'DECREASE'
+import {INCREASE,DECREASE} from '../constants/ActionTypes';
 
 export default (state = { count: 10 }, action) => {
   const count = state.count;
