@@ -20,6 +20,7 @@ import Counter from '../components/Counter';
 ************** */
 function mapStateToProps(state) {
   //是否使用combineReducers true:state.counter.count  false:state.count
+  //Store对象包含所有数据。如果想得到某个时点的数据，就要对 Store 生成快照。这种时点的数据集合，就叫做 State。
   return {
     count:state.counter.count
   }

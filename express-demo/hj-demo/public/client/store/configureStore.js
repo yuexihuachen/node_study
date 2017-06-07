@@ -6,7 +6,9 @@ const createStoreWithMiddleware = applyMiddleware(
   logger
 )(createStore)
 
+
 export default function configureStore(initialState) {
+  //Store 就是保存数据的地方，你可以把它看成一个容器。整个应用只能有一个 Store。
   const store = createStoreWithMiddleware(reducer, initialState)
 
   /*模块热替换(hot module replacement)
