@@ -50,8 +50,8 @@ ReactDOM.render(
 );
 
 var arr = [
-  <h1>Hello world!</h1>,
-  <h2>React is awesome</h2>,
+  <h1 key={0}>Hello world!</h1>,
+  <h2 key={1}>React is awesome</h2>,
 ];
 ReactDOM.render(
   <div>{arr}</div>,
@@ -73,8 +73,8 @@ class NotesList extends React.Component {
     return (
       <ol>
         {
-          React.Children.map(this.props.children, function (child) {
-            return <li>{child}</li>;
+          React.Children.map(this.props.children, function (child,index) {
+            return <li key={index}>{child}</li>
           })
         }
       </ol>
@@ -97,6 +97,11 @@ class MyTitle extends React.Component {
     return (<h1> {this.props.title} </h1>);
   }
 };
+
+MyTitle.propTypes ={
+  title:React.PropTypes.number.isRequired
+}
+
 ReactDOM.render(
   <MyTitle title={data} />,
   rootEl.root6
@@ -173,4 +178,5 @@ class Input extends React.Component {
 Input.defaultProps = {
   value: 'Mary'
 };
+
 ReactDOM.render(<Input />, rootEl.root9);
