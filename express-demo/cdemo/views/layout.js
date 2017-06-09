@@ -8,6 +8,8 @@ class Layout extends React.Component {
         <head>
           <title>{this.props.data.title}</title>
           <meta charSet='utf-8' />
+          {/*需要使用 IE8 Standards Mode*/}
+           <meta http-equiv="x-ua-compatible" content="ie=edge"/>
           <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
           <meta name="keywords" content={this.props.data.keywords} />
           <meta name="description" content={this.props.data.description} />
@@ -35,10 +37,5 @@ class Layout extends React.Component {
     );
   }
 }
-
-Layout.propTypes = {
-  title: React.PropTypes.string
-};
-
 
 module.exports = Layout;

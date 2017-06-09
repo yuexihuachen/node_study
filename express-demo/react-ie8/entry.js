@@ -1,20 +1,13 @@
-/**
- * CANNOT use `import` to import `es5-shim`,
- * because `import` will be transformed to `Object.defineProperty` by babel,
- * `Object.defineProperty` doesn't exists in IE8,
- * (but will be polyfilled after `require('es5-shim')` executed).
- */
-
 require('es5-shim');
 require('es5-shim/es5-sham');
 require('console-polyfill');
 
 /**
- * CANNOT use `import` to import `react` or `react-dom`,
- * because `import` will run `react` before `require('es5-shim')`.
+一个令人失望的消息：从 React v15 开始，React DOM 将不会再支持 IE8 了。而中国还有超过 18% 的人在使用 IE8。
+首先，你不应该使用 React v15 或更高版本。使用仍然支持 IE8 的 React v0.14 即可。
+
  */
-// import React from 'react';
-// import ReactDOM from 'react-dom';
+
 
 const React = require('react');
 const ReactDOM = require('react-dom');

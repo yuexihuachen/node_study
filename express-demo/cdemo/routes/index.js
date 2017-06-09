@@ -1,7 +1,8 @@
-import express from 'express';
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
-import defaults from '../config/defaults';
+var express = require('express');
+var React = require('react');
+var ReactDOMServer = require('react-dom/server');
+
+var defaults = require('../config/paramConfig');
 /*
 ReactDOMServer 类允许您在服务器上渲染组件。
 renderToString()
@@ -10,7 +11,6 @@ renderToStaticMarkup()
 作为一个简单的静态页面生成器，很有用
 */
 
-"use strict";
 let router = express.Router();
 
 var cfun=function(req, res, next) {

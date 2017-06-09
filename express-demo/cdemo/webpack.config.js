@@ -11,15 +11,15 @@ module.exports = {
     filename: '[name].js'
   },
    plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,//压缩文件
-        drop_console: false,
-      },
-      comments:false,//去掉注释
-      sourceMap: true
-    }),
-     new webpack.HotModuleReplacementPlugin(),// webpack-dev-server 强化插件
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false,//压缩文件
+    //     drop_console: false,
+    //   },
+    //   comments:false,//去掉注释
+    //   sourceMap: true
+    // }),
+     //new webpack.HotModuleReplacementPlugin(),// webpack-dev-server 强化插件
      new webpack.optimize.CommonsChunkPlugin({  // 构建优化插件
        names:["vendor"],
        minChunks: Infinity
