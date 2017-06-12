@@ -14,7 +14,8 @@ class Counter extends React.Component {
     //不能直接修改 state(状态)，唯一可以分配 this.state 的地方是构造函数。
   }
   componentDidMount(){//在组件输出被渲染到 DOM 之后运行
-     
+    const { dispatch, selectedSubreddit } = this.props
+    dispatch(fetchPostsIfNeeded(selectedSubreddit))
   }
   render() {
     //输出逻辑：用户发出的动作如何变为 Action 对象，从 UI 组件传出去。它可以是一个函数，也可以是一个对象。做出不同的处理

@@ -9,7 +9,7 @@ class Counter extends React.Component {
     //组件需要与用户互动，React 就是将组件看成是一个状态机，
     //一开始有一个初始状态this.state，然后和用户互动，导致状态变化，从而触发重新渲染 UI 
     //当用户点击组件，导致状态变化，this.setState 方法就是修改状态值，每次修改以后，自动调用 this.render 方法，再次渲染组件。
-
+    //设置默认的state
     //不能直接修改 state(状态)，唯一可以分配 this.state 的地方是构造函数。
   }
   componentWillMount(){//在组件装载发生之前立即被调用。 
@@ -67,6 +67,12 @@ class CountContent extends React.Component{
     }
   }
 }
+
+
+//设置默认的props
+// Counter.defaultProps={
+
+// }
 
 Counter.propTypes = {
   increase: PropTypes.func.isRequired,
