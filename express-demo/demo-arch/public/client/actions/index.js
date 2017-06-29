@@ -30,11 +30,11 @@ function pleaseEatReceive(text,json){
 }
 
 export function fetchEatPosts(text){
-    return function(){
-        pleaseEatRequest(text);
+    return dispatch=>{
+        dispatch(pleaseEatRequest(text));
         return fetch(`http://www.reddit.com/r/reactjs.json`)
             .then(response => response.json())
-            .then(json => pleaseEatReceive(text, json))
+            .then(json => dispatch(pleaseEatReceive(text, json)))
     }
         
 }

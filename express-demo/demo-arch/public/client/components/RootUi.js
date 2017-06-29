@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import  * as actions from '../actions';
 
 //UI 组件
 class RootUi extends React.Component {
@@ -42,14 +43,13 @@ class RootUi extends React.Component {
     console.log("shouldComponentUpdate");
   }
   handInName(){
-    const {fetchEatPosts} = this.props.data; 
+    const {fetchEatPosts,dispatch} = this.props.data; 
     console.log(event.target.innerText);
     if(event.target.innerText=="请吃饭"){
-      fetchEatPosts('EAT_REQUEST');
+      dispatch(actions.fetchEatPosts('EAT_REQUEST'));
     } else {
   
     }
-    
   }
   render() {
     //输出逻辑：用户发出的动作如何变为 Action 对象，从 UI 组件传出去。它可以是一个函数，也可以是一个对象。做出不同的处理

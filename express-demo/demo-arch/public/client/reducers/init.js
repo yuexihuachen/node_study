@@ -7,7 +7,7 @@ const initData=["请吃饭","请喝酒"];
 function eatRequest(state, action){
     switch (action.type) {
       case PLEASE_EAT_REQUEST:
-        return ;
+        return Object.assign({}, state);
       default:
         return state
     }

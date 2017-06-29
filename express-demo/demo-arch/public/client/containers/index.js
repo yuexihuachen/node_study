@@ -40,8 +40,7 @@ function mapDispatchToProps(dispatch) {
 //   connect用于从 UI 组件生成容器组件。connect就是将这两种组件连起来。
 //容器组件App 容器组件和UI组件并不是绝对的，可以互相使用
 const App = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(Counter)
 
 export default App
