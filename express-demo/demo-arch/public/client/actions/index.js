@@ -4,90 +4,45 @@ import {INCREASE,DECREASE,REQUEST_TYPE,RECEIVE_TYPE,PLEASE_EAT_REQUEST,PLEASE_EA
 
 
 //Action 只是描述了有事情发生了这一事实
-export const increase = text => ({
-  type: INCREASE,
+const pleaseEatRequest=text=>({
+  type:PLEASE_EAT_REQUEST,
   text
 })
 
-export const decrease = text => ({
-  type: DECREASE,
-  text
+const pleaseEatReceive=(text,json)=>({
+  type:PLEASE_EAT_RECEIVE,
+  text,
+  data:json
 })
 
-function pleaseEatRequest(text){
-    return {
-        type:PLEASE_EAT_REQUEST,
-        text
-    }
-}
-
-function pleaseEatReceive(text,json){
-    return {
-        type:PLEASE_EAT_RECEIVE,
-        text,
-        data:json
-    }
-}
-
-export function fetchEatPosts(text){
-    return ()=>{
-        pleaseEatRequest(text);
-        return fetch(`http://www.reddit.com/r/reactjs.json`)
-            .then(response => response.json())
-            .then(json => pleaseEatReceive(text, json))
-    }
-        
-}
-
-
-
-export const pleaseDrink=text=>({
-  type:PLEASE_DRINK,
-  text
-})
-
-
-
-function requestPosts(text) {
-  return {
-    type: REQUEST_TYPE,
-    text
-  }
-}
-
-function receivePosts(text, json) {
-  return {
-    type: RECEIVE_TYPE,
-    text,
-    posts: json.data.children.map(child => child.data),
-    receivedAt: Date.now()
-  }
-}
 
 function fetchPosts(text) {
   return dispatch => {
-    dispatch(requestPosts(text))
-    return fetch(`http://www.reddit.com/r/${text}.json`)
-      .then(response => response.json())
-      .then(json => dispatch(receivePosts(text, json)))
+    dispatch(pleaseEatRequest(text));
+    
+    // return fetch(`http://www.reddit.com/r/reactjs.json`)
+    //   .then(response => response.json())
+    //   .then(json => dispatch(pleaseEatReceive(text, json)))
+
+      setTimeout(function() {
+        dispatch(pleaseEatReceive('SUCCESS', {
+            eatTypes:"请吃饭",
+            drinkTypes:"请喝酒",
+            eatData:["酒店","饭店","大排档"]
+          }));
+      }, 1000);
+    
+
   }
 }
 
-function shouldFetchPosts(state, text) {
-  const posts = state.postsBySubreddit[text]
-  if (!posts) {
-    return true
-  } else if (posts.isFetching) {
-    return false
-  } else {
-    return posts.didInvalidate
-  }
-}
 
- function fetchPostsIfNeeded(text) {
+
+export function fetchTypes(text){
   return (dispatch, getState) => {
-    if (shouldFetchPosts(getState(), text)) {
-      return dispatch(fetchPosts(text))
-    }
+
+    return dispatch(fetchPosts(text));
+    
   }
 }
+
