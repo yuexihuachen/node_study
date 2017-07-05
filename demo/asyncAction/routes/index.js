@@ -6,7 +6,7 @@ import defaults from '../config/defaults';
 let router = express.Router();
 
 router.get('/', function(req, res, next) {
-
+console.log('-----------------------------------------')
   defaults.body='';
   defaults.title='asyncAction';
   defaults.content="asyncAction";

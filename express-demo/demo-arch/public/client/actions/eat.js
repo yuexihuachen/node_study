@@ -16,11 +16,11 @@ pleaseEatReceive=(text,json)=>({
 })
 
 export function fetchEatPosts(text){
-    return dispatch => {
-      dispatch(pleaseEatRequest(text))
+    return () => {
+      pleaseEatRequest(text)
       return fetch(`http://www.reddit.com/r/${text}.json`)
         .then(response => response.json())
-        .then(json => dispatch(pleaseEatReceive(text, json)))
+        .then(json => pleaseEatReceive(text, json))
     }
 }
 

@@ -43,10 +43,9 @@ class RootUi extends React.Component {
     console.log("shouldComponentUpdate");
   }
   handInName(){
-    const {fetchEatPosts,dispatch} = this.props.data; 
-    console.log(event.target.innerText);
+    const {fetchEatPosts} = this.props.data; 
     if(event.target.innerText=="请吃饭"){
-      dispatch(actions.fetchEatPosts('EAT_REQUEST'));
+      actions.fetchEatPosts('EAT_REQUEST');
     } else {
   
     }
