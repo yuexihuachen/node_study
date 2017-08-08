@@ -11,10 +11,6 @@ var users = require('./routes/users');
 onerror(app);
 
 // global middlewares
-// app.use(views('views', {
-//   root: __dirname + '/views',
-//   default: 'jade'
-// }));
 app.use(views(__dirname + '/views', {
   map: {
     html: 'nunjucks'
