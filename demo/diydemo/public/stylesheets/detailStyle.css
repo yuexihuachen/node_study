@@ -49,14 +49,6 @@ body {
   align-items: center;
 }
 
-.chometop {
-
-}
-
-.chomecon{
-
-}
-
 .headcenter{
   flex: 1;
   display: flex;
@@ -98,4 +90,6 @@ a {
   width: 100%;  
   height: auto;
 }
-
+.imgContent img{
+    width: 100%;
+}
