@@ -24,6 +24,7 @@ var cfun=function(req, res, next) {
     onDecreaseClick={function(){}}
     />);*/
 
+    console.log(Counter)
     defaults.body=ReactDOMServer.renderToStaticMarkup(<Counter 
       count={10}
       increase={function(){}}
