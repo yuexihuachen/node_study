@@ -47,6 +47,12 @@ class CountContent extends React.Component{
   hasData(){
     const { count,increase,decrease } = this.props.params;
     return (<div>
+                    <input 
+              type="text"
+              className="context"
+              placeholder="请输入卡券"
+              maxLength="25"
+            />
         <div className="title">计时器</div>
         <span>{count}</span>
         <button onClick={increase.bind('add')}>Increase</button>

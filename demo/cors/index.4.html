@@ -1,71 +1,127 @@
 <!DOCTYPE html>
 <html dpr="1" style="font-size:22.5px;">
-<head>
-  <title>anai</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-  <meta name="MobileOptimized" content="320" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="screen-orientation" content="portrait" />
-  <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
-  <script type="text/javascript" src="./TouchSlide.1.1.js"></script>
-  <style>
-    	/* 焦点图 */
-    .slideBox{ position:relative; overflow:hidden; margin:10px auto;  max-width:560px;/* 设置焦点图最大宽度 */ }
-    .slideBox .hd{ position:absolute; height:28px; line-height:28px; bottom:0; right:0; z-index:1; }
-    .slideBox .hd li{ display:inline-block; width:5px; height:5px; -webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px; background:#333; text-indent:-9999px; overflow:hidden; margin:0 6px;   }
-    .slideBox .hd li.on{ background:#fff;  }
-    .slideBox .bd{ position:relative; z-index:0; }
-    .slideBox .bd li{ position:relative; text-align:center;  }
-    .slideBox .bd li img{ background:url(images/loading.gif) center center no-repeat;  vertical-align:top; width:100%;/* 图片宽度100%，达到自适应效果 */}
-    .slideBox .bd li a{ -webkit-tap-highlight-color:rgba(0,0,0,0);  }  /* 去掉链接触摸高亮 */
-    .slideBox .bd li .tit{ display:block; width:100%;  position:absolute; bottom:0; text-indent:10px; height:28px; line-height:28px; background:url(images/focusBg.png) repeat-x; color:#000;  text-align:left;  }
-  </style>
-</head>
-<body>
-  <div id="slideBox" class="slideBox">
 
+<head>
+	<title>anai</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<meta name="MobileOptimized" content="320" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="mobile-web-app-capable" content="yes" />
+	<meta name="screen-orientation" content="portrait" />
+	<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<script type="text/javascript" src="./TouchSlide.1.1.js"></script>
+	<style>
+		/* 焦点图 */
+		.slideBox ul {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			vertical-align: middle;
+			font-weight: normal;
+		}
+
+		.slideBox {
+			position: relative;
+			overflow: hidden;
+			margin: 10px auto;
+			max-width: 1024px;
+		}
+
+		.slideBox .hd {
+			position: absolute;
+			height: 28px;
+			line-height: 28px;
+			bottom: 0;
+			right: 0;
+			z-index: 1;
+		}
+
+		.slideBox .hd li {
+			display: inline-block;
+			width: 5px;
+			height: 5px;
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			border-radius: 5px;
+			background: #333;
+			text-indent: -9999px;
+			overflow: hidden;
+			margin: 0 6px;
+		}
+
+		.slideBox .hd li.on {
+			background: #fff;
+		}
+
+		.slideBox .bd {
+			position: relative;
+			z-index: 0;
+		}
+
+		.slideBox .bd li {
+			position: relative;
+			text-align: center;
+		}
+
+		.slideBox .bd li img {
+			background: url(images/loading.gif) center center no-repeat;
+			vertical-align: top;
+			width: 100%;
+			/* 图片宽度100%，达到自适应效果 */
+		}
+
+		.slideBox .bd li a {
+			-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+		}
+		/* 去掉链接触摸高亮 */
+	</style>
+</head>
+
+<body>
+	<div id="slideBox" class="slideBox">
 		<div class="bd">
-			<div class="tempWrap" style="overflow:hidden; position:relative;"><ul style="width: 2160px; position: relative; overflow: hidden; padding: 0px; margin: 0px; transition-duration: 200ms; transform: translate(-720px, 0px) translateZ(0px);">
+			<div class="tempWrap" style="overflow:hidden; position:relative;">
+				<ul style="width: 2160px; position: relative; overflow: hidden; padding: 0px; margin: 0px; transition-duration: 200ms; transform: translate(-720px, 0px) translateZ(0px);">
 					<li style="display: table-cell; vertical-align: top; width: 360px;">
 						<a class="pic" href="#"><img src="https://img.alicdn.com/tfs/TB1eD5cSpXXXXbmXXXXXXXXXXXX-520-280.jpg"></a>
-						<a class="tit" href="#">1111111111111</a>
-					</li><li style="display: table-cell; vertical-align: top; width: 360px;">
+					</li>
+					<li style="display: table-cell; vertical-align: top; width: 360px;">
 						<a class="pic" href="#"><img src="https://img.alicdn.com/tfs/TB14fRvSpXXXXamaFXXXXXXXXXX-520-280.jpg"></a>
-						<a class="tit" href="#">22222222222222222</a>
 					</li>
 					<li style="display: table-cell; vertical-align: top; width: 360px;">
 						<a class="pic" href="#"><img src="https://aecpm.alicdn.com/tps/i2/TB10vPXKpXXXXacXXXXvKyzTVXX-520-280.jpg"></a>
-						<a class="tit" href="#">3333333333333333333333</a>
 					</li>
 					<li style="display: table-cell; vertical-align: top; width: 360px;">
 						<a class="pic" href="#"><img src="https://aecpm.alicdn.com/tps/i1/TB1r4h8JXXXXXXoXXXXvKyzTVXX-520-280.jpg"></a>
-						<a class="tit" href="#">44444444444444444444</a>
 					</li>
 					<li style="display: table-cell; vertical-align: top; width: 360px;">
 						<a class="pic" href="#"><img src="https://img.alicdn.com/simba/img/TB1g_TJOVXXXXbUXFXXSutbFXXX.jpg"></a>
-						<a class="tit" href="#">555555555555555555</a>
 					</li>
-			<li style="display: table-cell; vertical-align: top; width: 360px;">
+					<li style="display: table-cell; vertical-align: top; width: 360px;">
 						<a class="pic" href="#"><img src="https://img.alicdn.com/tfs/TB1eD5cSpXXXXbmXXXXXXXXXXXX-520-280.jpg"></a>
-						<a class="tit" href="#">6666666666666666666666666666</a>
-					</li></ul></div>
+					</li>
+				</ul>
+			</div>
 		</div>
-
 		<div class="hd">
-			<ul><li class="">1</li><li class="on">2</li><li class="">3</li><li class="">4</li></ul>
+			<ul>
+				<li class="">1</li>
+				<li class="on">2</li>
+				<li class="">3</li>
+				<li class="">4</li>
+			</ul>
 		</div>
 	</div>
-		<script type="text/javascript">
-		TouchSlide({ 
-			slideCell:"#slideBox",
-			titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
-			mainCell:".bd ul", 
-			effect:"leftLoop", 
-			autoPage:true,//自动分页
-			autoPlay:true //自动播放
+	<script type="text/javascript">
+		TouchSlide({
+			slideCell: "#slideBox",
+			titCell: ".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+			mainCell: ".bd ul",
+			effect: "leftLoop",
+			autoPage: true,//自动分页
+			autoPlay: true //自动播放
 		});
 	</script>
 </body>
