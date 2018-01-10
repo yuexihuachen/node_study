@@ -12,19 +12,19 @@
                 callbacks = [];  //callbacks为数组，因为可能同时有很多个回调
 
             this.then = function (onFulfilled) {
-                if (state === 'pending') {
-                    callbacks.push(onFulfilled);
-                    return this;/*能够链式调用*/
-                }
-                onFulfilled(value);/*在Promise异步操作成功这之后调用的then注册的回调也会执行*/
-                return this;
+                // if (state === 'pending') {
+                //     callbacks.push(onFulfilled);
+                //     return this;/*能够链式调用*/
+                // }
+                // onFulfilled(value);/*在Promise异步操作成功这之后调用的then注册的回调也会执行*/
+                // return this;
 
-                // return new Promise(function (resolve) {
-                //     handle({
-                //         onFulfilled: onFulfilled || null,
-                //         resolve: resolve
-                //     });
-                // });
+                return new Promise(function (resolve) {
+                    handle({
+                        onFulfilled: onFulfilled || null,
+                        resolve: resolve
+                    });
+                });
             };
 
             function handle(callback) {
@@ -43,30 +43,30 @@
             }
 
             function resolve(newValue) {
-                value = newValue;
-                state = 'fulfilled';
-                setTimeout(function () {
-                    callbacks.forEach(function (callback) {
-                        callback(value);
-                    });
-                }, 0);
+                // value = newValue;
+                // state = 'fulfilled';
+                // setTimeout(function () {
+                //     callbacks.forEach(function (callback) {
+                //         callback(value);
+                //     });
+                // }, 0);
                 /*setTimeout(fn,0) 等到同步任务和"任务队列"现有的事件都处理完，才会得到执行。*/
                 /*通过setTimeout机制，将resolve中执行回调的逻辑放置到JS任务队列末尾，以保证在resolve执行时，then方法的回调函数已经注册完成.*/
 
-                // if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
-                //     var then = newValue.then;
-                //     if (typeof then === 'function') {
-                //         then.call(newValue, resolve);
-                //         return;
-                //     }
-                // }
-                // state = 'fulfilled';
-                // value = newValue;
-                // setTimeout(function () {
-                //     callbacks.forEach(function (callback) {
-                //         handle(callback);
-                //     });
-                // }, 0);
+                if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
+                    var then = newValue.then;
+                    if (typeof then === 'function') {
+                        then.call(newValue, resolve);
+                        return;
+                    }
+                }
+                state = 'fulfilled';
+                value = newValue;
+                setTimeout(function () {
+                    callbacks.forEach(function (callback) {
+                        handle(callback);
+                    });
+                }, 0);
             }
             //使用到了闭包，通过闭包使用到了Promise内部函数resolve
             fn(resolve);
@@ -75,8 +75,8 @@
         function getUserId() {
             return new Promise(function (resolve) {
                 // setTimeout(function () {
-                //     resolve('test');
-                // }, 2000)
+                //     resolve(9876);
+                // }, 200);
                 resolve(9876);
             });
         }
@@ -90,9 +90,7 @@
         }
 
         // 例2
-        getUserId().then(function (res) {
-            console.log(res)
-        }).then(function (res) {
+        getUserId().then().then(function (res) {
             console.log(res)
         });
 
