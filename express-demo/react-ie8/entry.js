@@ -84,7 +84,6 @@ ReactDOM.render(
 
 
 
-var data = 123;
 class MyTitle extends React.Component {
   render() {
     return (<h1> {this.props.title} </h1>);
@@ -95,8 +94,12 @@ MyTitle.propTypes ={
   title:React.PropTypes.number.isRequired
 }
 
+MyTitle.defaultProps={
+  title:123
+}
+
 ReactDOM.render(
-  <MyTitle title={data} />,
+  <MyTitle />,
   rootEl.root6
 );
 
@@ -173,3 +176,4 @@ Input.defaultProps = {
 };
 
 ReactDOM.render(<Input />, rootEl.root9);
+
