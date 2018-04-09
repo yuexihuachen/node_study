@@ -4,101 +4,165 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <title>iScroll demo: simple</title>
-    <script>
-        function Promise(fn) {
-            var state = 'pending',
-                value = null,
-                callbacks = [];  //callbacks为数组，因为可能同时有很多个回调
-
-            this.then = function (onFulfilled) {
-                // if (state === 'pending') {
-                //     callbacks.push(onFulfilled);
-                //     return this;/*能够链式调用*/
-                // }
-                // onFulfilled(value);/*在Promise异步操作成功这之后调用的then注册的回调也会执行*/
-                // return this;
-
-                return new Promise(function (resolve) {
-                    handle({
-                        onFulfilled: onFulfilled || null,
-                        resolve: resolve
-                    });
-                });
-            };
-
-            function handle(callback) {
-                if (state === 'pending') {
-                    callbacks.push(callback);
-                    return;
-                }
-                //如果then中没有传递任何东西
-                if (!callback.onFulfilled) {
-                    callback.resolve(value);
-                    return;
-                }
-
-                var ret = callback.onFulfilled(value);
-                callback.resolve(ret);
-            }
-
-            function resolve(newValue) {
-                // value = newValue;
-                // state = 'fulfilled';
-                // setTimeout(function () {
-                //     callbacks.forEach(function (callback) {
-                //         callback(value);
-                //     });
-                // }, 0);
-                /*setTimeout(fn,0) 等到同步任务和"任务队列"现有的事件都处理完，才会得到执行。*/
-                /*通过setTimeout机制，将resolve中执行回调的逻辑放置到JS任务队列末尾，以保证在resolve执行时，then方法的回调函数已经注册完成.*/
-
-                if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
-                    var then = newValue.then;
-                    if (typeof then === 'function') {
-                        then.call(newValue, resolve);
-                        return;
-                    }
-                }
-                state = 'fulfilled';
-                value = newValue;
-                setTimeout(function () {
-                    callbacks.forEach(function (callback) {
-                        handle(callback);
-                    });
-                }, 0);
-            }
-            //使用到了闭包，通过闭包使用到了Promise内部函数resolve
-            fn(resolve);
+    <title>Flex 布局教程</title>
+    <style>
+        .first-face {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        function getUserId() {
-            return new Promise(function (resolve) {
-                // setTimeout(function () {
-                //     resolve(9876);
-                // }, 200);
-                resolve(9876);
-            });
+        .second-face {
+            display: flex;
+            justify-content: space-between;
         }
 
-        function getUserJobById(id) {
-            return new Promise(function (resolve) {
-                setTimeout(function () {
-                    resolve('job'+id);
-                }, 2000)
-            });
+        .second-face .pip:nth-of-type(2) {
+            align-self: flex-end;
         }
 
-        // 例2
-        getUserId().then().then(function (res) {
-            console.log(res)
-        });
+        .third-face {
+            display: flex;
+            justify-content: space-between;
+        }
 
-    </script>
+        .third-face .pip:nth-of-type(2) {
+            align-self: center;
+        }
+
+        .third-face .pip:nth-of-type(3) {
+            align-self: flex-end;
+        }
+
+        .fourth-face,
+        .sixth-face {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .fourth-face .column,
+        .sixth-face .column {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .fifth-face {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .fifth-face .column {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .fifth-face .column:nth-of-type(2) {
+            justify-content: center;
+        }
+
+        /* OTHER STYLES */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            vertical-align: center;
+            flex-wrap: wrap;
+            align-content: center;
+            font-family: 'Open Sans', sans-serif;
+
+            background: linear-gradient(top, #222, #333);
+        }
+
+        [class$="face"] {
+            margin: 16px;
+            padding: 4px;
+
+            background-color: #e7e7e7;
+            width: 104px;
+            height: 104px;
+            object-fit: contain;
+
+            box-shadow: inset 0 5px white,
+            inset 0 -5px #bbb,
+            inset 5px 0 #d7d7d7,
+            inset -5px 0 #d7d7d7;
+
+            border-radius: 10%;
+        }
+
+        .pip {
+            display: block;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin: 4px;
+
+            background-color: #333;
+            box-shadow: inset 0 3px #111, inset 0 -3px #555;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="btn" id="btn"></div>
+    <div class="first-face">
+        <span class="pip"></span>
+    </div>
+    <div class="second-face">
+        <span class="pip"></span>
+        <span class="pip"></span>
+    </div>
+    <div class="third-face">
+        <span class="pip"></span>
+        <span class="pip"></span>
+        <span class="pip"></span>
+    </div>
+    <div class="fourth-face">
+        <div class="column">
+            <span class="pip"></span>
+            <span class="pip"></span>
+        </div>
+        <div class="column">
+            <span class="pip"></span>
+            <span class="pip"></span>
+        </div>
+    </div>
+    <div class="fifth-face">
+        <div class="column">
+            <span class="pip"></span>
+            <span class="pip"></span>
+        </div>
+        <div class="column">
+            <span class="pip"></span>
+        </div>
+        <div class="column">
+            <span class="pip"></span>
+            <span class="pip"></span>
+        </div>
+    </div>
+    <div class="sixth-face">
+        <div class="column">
+            <span class="pip"></span>
+            <span class="pip"></span>
+            <span class="pip"></span>
+        </div>
+        <div class="column">
+            <span class="pip"></span>
+            <span class="pip"></span>
+            <span class="pip"></span>
+        </div>
+    </div>
 </body>
 
 </html>
