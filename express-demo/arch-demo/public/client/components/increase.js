@@ -8,7 +8,7 @@ class Increase extends React.Component {
   }
   increase(){
     const { increase } = this.props;
-    return <button onClick={increase.bind()}>Increase</button>;
+    return <button onClick={increase}>Increase</button>;
   }
   render(){
     return this.increase();

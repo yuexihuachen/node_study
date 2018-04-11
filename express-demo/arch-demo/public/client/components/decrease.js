@@ -8,7 +8,7 @@ class Decrease extends React.Component {
   }
   decrease(){
     const { decrease } = this.props;
-    return <button onClick={decrease.bind(null)}>Decrease</button>;
+    return <button onClick={decrease}>Decrease</button>;
   }
   render(){
     return this.decrease();
