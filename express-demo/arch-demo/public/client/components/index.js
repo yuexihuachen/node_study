@@ -8,7 +8,7 @@ import Increase from '../containers/increase';
 import Decrease from '../containers/decrease';
 
 //UI 组件
-class Counter extends React.Component {
+class Index extends React.Component {
   constructor(props) {// 类构造函数(class constructor) 初始化 
     super(props);
     //组件需要与用户互动，React 就是将组件看成是一个状态机，
@@ -43,14 +43,12 @@ class Counter extends React.Component {
   render() {
     //输出逻辑：用户发出的动作如何变为 Action 对象，从 UI 组件传出去。它可以是一个函数，也可以是一个对象。做出不同的处理
     //const { count, onIncreaseClick,onDecreaseClick } = this.props //对象
-    const parentState = this.props; //函数
-    return (<CountContent params={parentState} />);
+    return (<CountContent />);
   }
 }
 
 class CountContent extends React.Component{
   hasData(){
-    const { count,increase,decrease } = this.props.params;
     return (<div>
         <Title title='计时器' />
         <Content />
@@ -64,20 +62,9 @@ class CountContent extends React.Component{
       </div>);
   }
   render(){
-    const {count}=this.props.params;
-    if(typeof count ==="number"){
-      return this.hasData();
-    } else {
-      return this.noData();
-    }
+    return this.hasData();
   }
 }
 
-Counter.propTypes = {
-  increase: PropTypes.func.isRequired,
-  decrease: PropTypes.func.isRequired,
-  count: PropTypes.number.isRequired
-}
-
-export default Counter
+export default Index;
 
