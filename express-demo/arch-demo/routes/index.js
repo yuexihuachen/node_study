@@ -1,8 +1,13 @@
 import express from 'express';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import Counter from '../public/client/components/Counter';
+import Counter from '../public/client/components/counter';
 import defaults from '../config/defaults';
+
+import { createStore, applyMiddleware,combineReducers } from 'redux'
+import { Provider } from 'react-redux';
+import reducers from '../public/client/reducers';
+import Index from '../public/client/components';
 /*
 ReactDOMServer 类允许您在服务器上渲染组件。
 renderToString()
@@ -23,12 +28,15 @@ var cfun=function(req, res, next) {
     onIncreaseClick={function(){}}
     onDecreaseClick={function(){}}
     />);*/
-
-    defaults.body=ReactDOMServer.renderToStaticMarkup(<Counter 
-      count={10}
-      increase={function(){}}
-      decrease={function(){}}
-    />);
+    // 创建新的 Redux store 实例
+    const store = createStore(reducers);
+    // 把组件渲染成字符串
+    const html = ReactDOMServer.renderToString(
+      <Provider store={store}>
+        <Index />
+      </Provider>
+    );
+    defaults.body=html;
 
   defaults.title='react-redux-webpack-express-node';
   defaults.content="react-redux-webpack-express-node";
