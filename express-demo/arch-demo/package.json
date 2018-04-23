@@ -11,15 +11,18 @@
     "build": "babel src -d lib",
     "test": "./node_modules/.bin/webpack --colors --profile --display-modules",
     "test:watch": "./node_modules/.bin/webpack --watch",
-    "debug": "node ./bin/www DEBUG=*"
+    "debug": "node ./bin/www DEBUG=*",
+    "start-w": "webpack-dev-server --open"
   },
   "dependencies": {
     "body-parser": "~1.16.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.0",
     "express": "~4.14.1",
+    "history": "^4.7.2",
     "morgan": "~1.7.0",
     "react-router": "^4.2.0",
+    "react-router-redux": "^4.0.8",
     "redux-logger": "^3.0.1",
     "serve-favicon": "~2.3.2"
   },
@@ -43,7 +46,11 @@
     "react-dom": "^15.5.4",
     "react-lite": "^0.15.37",
     "react-redux": "^5.0.3",
+    "react-router": "^4.2.0",
     "redux": "^3.6.0",
-    "webpack": "^2.5.1"
+    "warning": "^3.0.0",
+    "webpack": "^2.5.1",
+    "webpack-cli": "^2.0.15",
+    "webpack-dev-server": "^3.1.3"
   }
 }

@@ -7,7 +7,7 @@ import defaults from '../config/defaults';
 import { createStore, applyMiddleware,combineReducers } from 'redux'
 import { Provider } from 'react-redux';
 import reducers from '../public/client/reducers';
-import Index from '../public/client/components';
+import App from '../public/client/components/app';
 /*
 ReactDOMServer 类允许您在服务器上渲染组件。
 renderToString()
@@ -33,7 +33,7 @@ var cfun=function(req, res, next) {
     // 把组件渲染成字符串
     const html = ReactDOMServer.renderToString(
       <Provider store={store}>
-        <Index />
+        <App />
       </Provider>
     );
     defaults.body=html;

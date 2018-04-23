@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware,combineReducers } from 'redux'
 import logger from 'redux-logger';
-import reducer from '../reducers'
+import reducer from '../reducers';
+
 
 // const createStoreWithMiddleware = applyMiddleware(
 //   logger
@@ -50,6 +51,7 @@ import reducer from '../reducers'
 //enhancer增强 (Function): Store enhancer 是一个组合 store creator 的高阶函数，
 //返回一个新的强化过的 store creator。这与 middleware 相似，它也允许你通过复合函数改变 store 接口。
 //applyMiddleware是 Redux 的原生方法，作用是将所有中间件组成一个数组，依次执行。
+
 const store = createStore(reducer,applyMiddleware(logger));
 // let store;
 // //环境的判断

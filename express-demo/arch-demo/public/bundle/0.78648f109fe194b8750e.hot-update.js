@@ -1,0 +1,2 @@
+webpackHotUpdate(0,{97:function(m,n){"use strict";throw new Error("Module build failed: SyntaxError: 'return' outside of function (26:0)\n\n[0m [90m 24 | [39m}\n [90m 25 | [39m\n[31m[1m>[22m[39m[90m 26 | [39m[36mreturn[39m [33mHistory[39m\n [90m    | [39m[31m[1m^[22m[39m\n [90m 27 | [39m\n [90m 28 | [39m[36mexport[39m [36mdefault[39m [33mHistory[39m\n [90m 29 | [39m[0m\n")}});
+//# sourceMappingURL=0.78648f109fe194b8750e.hot-update.js.map

@@ -11,7 +11,7 @@ module.exports = {
     path: __dirname + '/public/bundle/',
     filename: '[name].js'
   },
-  devtool: 'eval',
+  devtool: 'nline-source-map',
   plugins: [//插件
     new webpack.DefinePlugin({ // 编译时(compile time)插件
       'process.env': {

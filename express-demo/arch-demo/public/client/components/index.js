@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
-import { Router, Route, browserHistory } from 'react-router';
 import  * as actions from '../actions'
 import Title from './title';
 import App from './app';
 import Content from '../containers/content';
 import Increase from '../containers/increase';
 import Decrease from '../containers/decrease';
+import History from './historyMiddle';
 
 
 //UI 组件
@@ -51,8 +51,14 @@ class Index extends React.Component {
 }
 
 class CountContent extends React.Component{
+  btnTest(e){
+    console.log(e)
+  }
   hasData(){
-    return <App />;
+    return <div>
+      <App />
+      <button id="btntest" onClick={this.btnTest.bind(this)}>test</button>
+    </div>;
   }
   noData(){
     return (<div>
