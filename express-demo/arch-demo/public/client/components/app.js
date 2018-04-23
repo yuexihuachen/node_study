@@ -4,14 +4,12 @@ import { bindActionCreators } from 'redux';
 import { Router, Route, browserHistory } from 'react-router';
 import  * as actions from '../actions'
 import Title from './title';
-import App from './app';
 import Content from '../containers/content';
 import Increase from '../containers/increase';
 import Decrease from '../containers/decrease';
 
-
 //UI 组件
-class Index extends React.Component {
+class App extends React.Component {
   constructor(props) {// 类构造函数(class constructor) 初始化 
     super(props);
     //组件需要与用户互动，React 就是将组件看成是一个状态机，
@@ -52,7 +50,12 @@ class Index extends React.Component {
 
 class CountContent extends React.Component{
   hasData(){
-    return <App />;
+    return (<div>
+        <Title title='计时器' />
+        <Content />
+        <Increase />
+        <Decrease />
+      </div>);
   }
   noData(){
     return (<div>
@@ -65,5 +68,5 @@ class CountContent extends React.Component{
 }
 
 
-export default Index;
+export default App;
 

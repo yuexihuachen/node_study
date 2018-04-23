@@ -15,7 +15,6 @@ class Layout extends React.Component {
         </head>
         <body>
             <div id='root' dangerouslySetInnerHTML={{__html:this.props.data.body}}></div>
-
             <link rel="stylesheet" href={this.props.data.initStyles} />
             <script type="text/javascript" src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
             <script type="text/javascript" async="" src={this.props.data.initVendor}></script>
