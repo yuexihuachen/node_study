@@ -11,7 +11,7 @@ class History extends Component {
 
     constructor(props, context) {
       super(props, context);
-      this[hisKey] = props.history;
+      this.props.hisdata = props.history;
     }
 
     render() {

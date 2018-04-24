@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
+
 import  * as actions from '../actions'
 import Title from './title';
 import App from './app';
@@ -52,12 +53,16 @@ class Index extends React.Component {
 
 class CountContent extends React.Component{
   btnTest(e){
-    console.log(e)
+    console.log(this)
   }
   hasData(){
     return <div>
-      <App />
+      <History history="data">
+        <App />
+      </History>
       <button id="btntest" onClick={this.btnTest.bind(this)}>test</button>
+      
+      
     </div>;
   }
   noData(){

@@ -15,16 +15,17 @@ module.exports = {
   plugins: [//插件
     new webpack.DefinePlugin({ // 编译时(compile time)插件
       'process.env': {
-        'NODE_ENV': JSON.stringify('production')
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-        warnings: false,//压缩文件
+        warnings: false,//警告
         drop_console: false,
       },
+      minimize:true,
       comments: false,//去掉注释
-      sourceMap: true
+      sourceMap: false
     }),
     new webpack.HotModuleReplacementPlugin(),// webpack-dev-server 强化插件
     new webpack.optimize.CommonsChunkPlugin({  // 构建优化插件

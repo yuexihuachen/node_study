@@ -50,7 +50,6 @@ class App extends React.Component {
 
 class CountContent extends React.Component{
   hasData(){
-    console.log(this)
     return (<div>
         <Title title='计时器' />
         <Content />
