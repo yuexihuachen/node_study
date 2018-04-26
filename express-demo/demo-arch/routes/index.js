@@ -16,6 +16,7 @@ let router = express.Router();
 
 let cfun=function(req, res, next) {
 
+["请吃饭","请喝酒"]
   //输出逻辑：用户发出的动作如何变为 Action 对象，从 UI 组件传出去。它可以是一个函数，也可以是一个对象。
   //函数或者对象做出不同的处理
   /*defaults.body=ReactDOMServer.renderToStaticMarkup(<Counter 
@@ -25,7 +26,12 @@ let cfun=function(req, res, next) {
     />);*/
   let initFun=function(){};
   defaults.body=ReactDOMServer.renderToStaticMarkup(<RootUi 
-    data={["请吃饭","请喝酒"]}
+    data={
+          {
+            eatTypes:"请吃饭",
+            drinkTypes:"请喝酒"
+          }
+        }
   />);
 
   defaults.title='Architecture';

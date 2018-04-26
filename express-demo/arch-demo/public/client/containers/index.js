@@ -4,7 +4,7 @@ import { connect  } from 'react-redux';
 import { bindActionCreators } from 'redux';
 //import {increase,decrease} from '../actions'
 import  * as actions from '../actions'
-import Counter from '../components/rootUi';
+import Counter from '../components/Counter';
 
 // 输入逻辑：外部的数据（即state对象）如何转换为 UI 组件的参数
 //mapStateToProps是一个函数。它的作用是建立一个从（外部的）state对象到（UI 组件的）props对象的映射关系。
@@ -18,17 +18,19 @@ import Counter from '../components/rootUi';
 在真实 DOM上，这种算法叫做 DOM diff ，它可以极大提高网页的性能表现
 
 ************** */
+//mapStateToProps 这个函数来指定如何把当前 Redux store state 映射到展示组件的 props 中。
 function mapStateToProps(state) {
   //是否使用combineReducers true:state.counter.count  false:state.count
   //Store对象包含所有数据。如果想得到某个时点的数据，就要对 Store 生成快照。这种时点的数据集合，就叫做 State。
   return {
-    data:state.init
+    count:state.counter.count
   }
 }
 
 // 输出逻辑：用户发出的动作如何变为 Action 对象，从 UI 组件传出去。
 //mapDispatchToProps是connect函数的第二个参数，用来建立 UI 组件的参数到store.dispatch方法的映射。
 //也就是说，它定义了哪些用户的操作应该当作 Action，传给 Store。它可以是一个函数，也可以是一个对象。
+//mapDispatchToProps() 方法接收 dispatch() 方法并返回期望注入到展示组件的 props 中的回调方法。
 function mapDispatchToProps(dispatch) {
   // return {
   //   onIncreaseClick: () => dispatch(increase('add')),
@@ -39,6 +41,13 @@ function mapDispatchToProps(dispatch) {
 
 //   connect用于从 UI 组件生成容器组件。connect就是将这两种组件连起来。
 //容器组件App 容器组件和UI组件并不是绝对的，可以互相使用
+/**
+ * 现在来创建一些容器组件把这些展示组件和 Redux 关联起来。技术上讲，容器组件就是使用 store.subscribe() 从 Redux state 树中读取部分数据，
+ * 并通过 props 来把这些数据提供给要渲染的组件。你可以手工来开发容器组件，但建议使用 React Redux 库的 connect() 方法来生成，
+ * 这个方法做了性能优化来避免很多不必要的重复渲染。
+ * 
+ * 
+*/
 const App = connect(
   mapStateToProps,
   mapDispatchToProps

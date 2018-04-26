@@ -2,6 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
+  devtool: "source-map",
   //entry: './public/client/index.js',
   entry: {//入口文件
     app: './public/client/index.js',//应用程序
