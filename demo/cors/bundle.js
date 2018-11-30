@@ -1,8 +1,9 @@
+'use strict';
 
 Vue.component('todo-item', {
   props: ['todo'],
   template: '<li>{{ todo.text }}</li>'
-})
+});
 
 var num=3;
 
@@ -50,42 +51,19 @@ var app2 = new Vue({
       app2.todos.push({
         index:app2.todos.length+1,
         text:app2.message
-      })
+      });
     },
     onMessage:function(){
-      app2.todos.push({ index:num++,text: '新项目' })
+      app2.todos.push({ index:num++,text: '新项目' });
     },
     doSomething:function(){
 
     },
     onSubmit:function(){
-      console.log(this)
+      console.log(this);
     }
   }
 });
-
-
-
-var mult = (function () {
-  var cache = {};
-
-  var calculate = function () { // 封闭 calculate 函数
-    var a = 1;
-    for (var i = 0, l = arguments.length; i < l; i++) {
-      a = a * arguments[i];
-    }
-    return a;
-  };
-
-
-  return function () {
-    var args = Array.prototype.join.call(arguments, ','); 
-    if (args in cache) {
-      return cache[args];
-    }
-    return cache[args] = calculate.apply(null, arguments);
-  }
-})();
 
 
 Function.prototype.before = function (beforefn) {
@@ -141,7 +119,7 @@ window.color = "red";
 var o = { color: "blue" };
 function sayColor(){
     console.log(this.color);
-    console.log(arguments)
+    console.log(arguments);
 }
 var objectSayColor = sayColor.bind(o,1,2,3,4);
 objectSayColor();    //blue

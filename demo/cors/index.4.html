@@ -11,7 +11,7 @@
 	<meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate" />
 	<meta http-equiv="Pragma" content="no-cache" />
 	<meta http-equiv="Expires" content="0" />
-	<script type="text/javascript" src="./TouchSlide.1.1.js"></script>
+	<script type="text/javascript" src="./TouchSlide.1.1.source.js"></script>
 	<style>
 		/* 焦点图 */
 		.slideBox ul {
@@ -52,7 +52,7 @@
 		}
 
 		.slideBox .hd li.on {
-			background: #fff;
+			background: #d02626;
 		}
 
 		.slideBox .bd {
@@ -66,7 +66,7 @@
 		}
 
 		.slideBox .bd li img {
-			background: url(images/loading.gif) center center no-repeat;
+
 			vertical-align: top;
 			width: 100%;
 			/* 图片宽度100%，达到自适应效果 */
@@ -76,6 +76,9 @@
 			-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 		}
 		/* 去掉链接触摸高亮 */
+		.item-com{
+			padding: 10px;
+		}
 	</style>
 </head>
 
@@ -85,22 +88,43 @@
 			<div class="tempWrap" style="overflow:hidden; position:relative;">
 				<ul style="width: 2160px; position: relative; overflow: hidden; padding: 0px; margin: 0px; transition-duration: 200ms; transform: translate(-720px, 0px) translateZ(0px);">
 					<li style="display: table-cell; vertical-align: top; width: 360px;">
-						<a class="pic" href="#"><img src="https://img.alicdn.com/tfs/TB1eD5cSpXXXXbmXXXXXXXXXXXX-520-280.jpg"></a>
+						<div class="item-com">
+							<a class="pic" href="#">
+								<img src="https://aecpm.alicdn.com/tps/i1/TB1r4h8JXXXXXXoXXXXvKyzTVXX-520-280.jpg">
+							</a>
+							<p>第一页</p>
+						</div>
 					</li>
 					<li style="display: table-cell; vertical-align: top; width: 360px;">
-						<a class="pic" href="#"><img src="https://img.alicdn.com/tfs/TB14fRvSpXXXXamaFXXXXXXXXXX-520-280.jpg"></a>
+						<div class="item-com">
+							<a class="pic" href="#"><img src="https://img.alicdn.com/tfs/TB14fRvSpXXXXamaFXXXXXXXXXX-520-280.jpg"></a>
+							<p>第二页</p>
+						</div>
+	
 					</li>
 					<li style="display: table-cell; vertical-align: top; width: 360px;">
-						<a class="pic" href="#"><img src="https://aecpm.alicdn.com/tps/i2/TB10vPXKpXXXXacXXXXvKyzTVXX-520-280.jpg"></a>
+						<div class="item-com">
+							<a class="pic" href="#"><img src="https://aecpm.alicdn.com/tps/i2/TB10vPXKpXXXXacXXXXvKyzTVXX-520-280.jpg"></a>
+							<p>第三页</p>
+						</div>
 					</li>
 					<li style="display: table-cell; vertical-align: top; width: 360px;">
-						<a class="pic" href="#"><img src="https://aecpm.alicdn.com/tps/i1/TB1r4h8JXXXXXXoXXXXvKyzTVXX-520-280.jpg"></a>
+						<div class="item-com">
+							<a class="pic" href="#"><img src="https://aecpm.alicdn.com/tps/i1/TB1r4h8JXXXXXXoXXXXvKyzTVXX-520-280.jpg"></a>
+							<p>第四页</p>
+						</div>
 					</li>
 					<li style="display: table-cell; vertical-align: top; width: 360px;">
-						<a class="pic" href="#"><img src="https://img.alicdn.com/simba/img/TB1g_TJOVXXXXbUXFXXSutbFXXX.jpg"></a>
+						<div class="item-com">
+							<a class="pic" href="#"><img src="https://img.alicdn.com/simba/img/TB1g_TJOVXXXXbUXFXXSutbFXXX.jpg"></a>
+							<p>第五页</p>
+						</div>
 					</li>
 					<li style="display: table-cell; vertical-align: top; width: 360px;">
-						<a class="pic" href="#"><img src="https://img.alicdn.com/tfs/TB1eD5cSpXXXXbmXXXXXXXXXXXX-520-280.jpg"></a>
+						<div class="item-com">
+							<a class="pic" href="#"><img src="https://img.alicdn.com/tfs/TB1eD5cSpXXXXbmXXXXXXXXXXXX-520-280.jpg"></a>
+							<p>第六页</p>
+						</div>
 					</li>
 				</ul>
 			</div>
@@ -117,6 +141,7 @@
 	<script type="text/javascript">
 		TouchSlide({
 			slideCell: "#slideBox",
+			slideW:document.body.clientWidth*.75,
 			titCell: ".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
 			mainCell: ".bd ul",
 			effect: "leftLoop",

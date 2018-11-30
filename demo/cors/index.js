@@ -76,8 +76,8 @@ function createCORSRequest(method, url){
 }
 
 
-
-var request = createCORSRequest("post", "http://m.ctrip.com/restapi/soa2/12568/search.json"); 
+//http://m.ctrip.com/restapi/soa2/12568/search.json
+var request = createCORSRequest("post", "http://137.116.141.39:3009/login"); 
 if (request){
     request.onload = function(res){
         //对 request.responseText 进行处理

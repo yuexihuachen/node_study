@@ -26,7 +26,10 @@
     (async function (x) { // 用于IIFE的异步函数表达式。
       var p_a = resolveAfter2Seconds(20);
       var p_b = resolveAfter2Seconds(30);
-      return x + await p_a + await p_b;
+      console.log(typeof p_a)
+      var aa=await p_a;
+      var bb=await p_b;
+      return x + aa + bb;
     })(10).then(v => {
       console.log(v);  // 2 秒后打印 60
     });

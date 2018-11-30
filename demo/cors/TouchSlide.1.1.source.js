@@ -17,7 +17,8 @@ var TouchSlide = function (a) {
 		pnLoop: a.pnLoop == 'undefined ' ? true : a.pnLoop, // 前后按钮点击是否继续执行效果，当为最前/后页是会自动添加“prevStop”/“nextStop”控制样色
 		startFun: a.startFun || null, // 每次切换效果开始时执行函数，用于处理特殊情况或创建更多效果。用法 satrtFun:function(i,c){ }； 其中i为当前分页，c为总页数
 		endFun: a.endFun || null, // 每次切换效果结束时执行函数，用于处理特殊情况或创建更多效果。用法 endFun:function(i,c){ }； 其中i为当前分页，c为总页数
-		switchLoad: a.switchLoad || null //每次切换效果结束时执行函数，用于处理特殊情况或创建更多效果。用法 endFun:function(i,c){ }； 其中i为当前分页，c为总页数
+		switchLoad: a.switchLoad || null, //每次切换效果结束时执行函数，用于处理特殊情况或创建更多效果。用法 endFun:function(i,c){ }； 其中i为当前分页，c为总页数
+		mainCellSlideW:a.slideW
 	}
 	var slideCell = document.getElementById(opts.slideCell.replace("#", ""));
 	if (!slideCell) return false;
@@ -91,7 +92,7 @@ var TouchSlide = function (a) {
 	var touchMove = hasTouch ? 'touchmove' : '';
 	var touchEnd = hasTouch ? 'touchend' : 'mouseup';
 	var slideH = 0;
-	var slideW = conBox.parentNode.clientWidth;// mainCell滑动距离
+	var slideW =opts.mainCellSlideW ||  conBox.parentNode.clientWidth;// mainCell滑动距离
 	var twCell,scrollY,tempSize = conBoxSize;
 	if (navObjSize == 0) navObjSize = conBoxSize;//处理分页
 	if (autoPage) {
