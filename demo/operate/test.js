@@ -399,3 +399,22 @@
 
 
 /**********************************************************/
+
+var getHelloWord=function() {
+    return "a" + "b";
+}
+
+var obj={
+    getHelloWord:getHelloWord
+}
+
+let key=Object.keys(obj);
+
+let name={};
+
+Object.defineProperty(name,key,{
+    get:typeof obj[key] === 'function' 
+    ? obj[key] 
+    : obj[key].get,
+    set:function(){}
+})
