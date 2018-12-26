@@ -596,9 +596,10 @@ function Person(fn){
         value = null,
         callbacks = [];  //callbacks为数组，因为可能同时有很多个回调
 
-    this.then=function(onFulfilled){
+    this.then=function(onFulfilled,onRejected){
         handle({
-            onFulfilled:onFulfilled || null
+            onFulfilled:onFulfilled || null,
+            onRejected:onRejected || null
         });
     }
 
@@ -612,6 +613,12 @@ function Person(fn){
         if(state===FULFILLED){
             callback.onFulfilled(value);
         }
+
+        if(state===REJECTED){
+            callback.onRejected(value);
+        }
+
+
 
     }
 
