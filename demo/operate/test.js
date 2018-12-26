@@ -587,24 +587,29 @@ function getUserId() {
 //   console.log(id)
 // })
 
+var PENDING = 0;
+var FULFILLED = 1;
+var REJECTED = 2;
+
 function Person(fn){
-    var state = 'pending',
+    var state = PENDING,
         value = null,
         callbacks = [];  //callbacks为数组，因为可能同时有很多个回调
 
     this.then=function(onFulfilled){
         handle({
             onFulfilled:onFulfilled || null
-        })
+        });
     }
 
     function handle(callback){
-        if(state==="pending"){
+
+        if(state===PENDING){
             callbacks.push(callback);
             return ;
         }
 
-        if(state==="fulfilled"){
+        if(state===FULFILLED){
             callback.onFulfilled(value);
         }
 
@@ -612,8 +617,14 @@ function Person(fn){
 
     function resolve(newValue) {
         value=newValue;
-        state='fulfilled';
+        state=FULFILLED;
         
+        execute();
+    }
+
+    function reject(error) {
+        value=error;
+        state=REJECTED;
         execute();
     }
 
@@ -625,10 +636,10 @@ function Person(fn){
         },3);
     }
 
-    fn(resolve);
+    fn(resolve,reject);
 }
 
-let p=new Person(function(resolve){
+let p=new Person(function(resolve,reject){
     setTimeout(function(){
         resolve('settimeout');
     },0);
