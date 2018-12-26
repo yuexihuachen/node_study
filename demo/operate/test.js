@@ -581,8 +581,59 @@ function getUserId() {
 
 
 // 例2
-let a=getUserId();
-a.then(function(id) {
-  // 一些处理
-  console.log(id)
-})
+//let a=getUserId();
+// a.then(function(id) {
+//   // 一些处理
+//   console.log(id)
+// })
+
+function Person(fn){
+    var state = 'pending',
+        value = null,
+        callbacks = [];  //callbacks为数组，因为可能同时有很多个回调
+
+    this.then=function(onFulfilled){
+        handle({
+            onFulfilled:onFulfilled || null
+        })
+    }
+
+    function handle(callback){
+        if(state==="pending"){
+            callbacks.push(callback);
+            return ;
+        }
+
+        if(state==="fulfilled"){
+            callback.onFulfilled(value);
+        }
+
+    }
+
+    function resolve(newValue) {
+        value=newValue;
+        state='fulfilled';
+        
+        execute();
+    }
+
+    function execute(){
+        setTimeout(function(){
+            callbacks.forEach(function(itemFun){
+                handle(itemFun);
+            })
+        },3);
+    }
+
+    fn(resolve);
+}
+
+let p=new Person(function(resolve){
+    setTimeout(function(){
+        resolve('settimeout');
+    },0);
+});
+
+p.then(function(name){
+    console.log(name)
+});

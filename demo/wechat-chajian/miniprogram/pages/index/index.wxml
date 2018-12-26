@@ -1,0 +1,9 @@
+<navigator id="nav" url="plugin://plugin-item1/home">
+  跳转插件页面
+</navigator>
+
+<button id="add" bindtap="addItem">Add item</button>
+
+<add-list items="{{ items }}" />
+
+

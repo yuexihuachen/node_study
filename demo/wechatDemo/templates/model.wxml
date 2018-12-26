@@ -1,0 +1,17 @@
+<template name="mask">
+  <view class="common-mask {{commonMaskToggle}}">
+    <view data-hidecommonmask="1" bindtap="onHideScroll" class="hwxmask"></view>
+    <view class="common-pop-board" style="{{commonCss}}">
+      <view class="common-pop-board-close" data-hidecommonmask="1" bindtap="onHideScroll"></view>
+      <view class="cpb-title">{{title}}</view>
+      <scroll-view scroll-y style="max-height: 668rpx;" class="cpb-content">
+        <text>
+          {{content}}
+        </text>
+      </scroll-view>
+      <view data-hidecommonmask="1" bindtap="onHideScroll" class="cpb-button">
+        {{btnName}}
+      </view>
+    </view>
+  </view>
+</template>

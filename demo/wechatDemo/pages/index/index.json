@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "header": "/components/index/header/index",
+    "content": "/components/index/content/index",
+    "content-item": "/components/index/content-item/index"
+  }
+}

@@ -1,0 +1,265 @@
+.container{
+  height: 100%;
+}
+.c-on{
+  position: fixed;
+  width: 100%;
+}
+
+.hide{
+  display: none !important;
+}
+.canvas {
+  width: 305px;
+  height: 305px;
+  background-color: #fff;
+}
+  .hwxmask {
+    background-color: #000;
+    filter: alpha(opacity=50);
+    opacity: .5;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5000;
+  }
+
+.container .common-mask {
+	display: flex;
+	justify-content: center
+}
+
+.container .common-mask .common-pop-board {
+	position: fixed;
+	top: 30%;
+	width: 78%;
+	background-color: #fff;
+	border-radius: 18rpx;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	z-index: 5001;
+	left: 11%
+}
+
+.container .common-mask .common-pop-board .common-pop-board-close {
+	width: 112rpx;
+	height: 112rpx;
+	background-image: url(//n1image.hjfile.cn/zhuanti/2018/11/09/4d5cd3d197e9fa07e690c35eb72ff032.png);
+	background-size: 25% 25%;
+	background-repeat: no-repeat;
+	background-position: 100% 0;
+	position: absolute;
+	top: 18rpx;
+	right: 18rpx
+}
+
+.container .common-mask .common-pop-board .cpb-title {
+	display: flex;
+	width: 100%;
+	color: #333;
+	font-size: 36rpx;
+	margin: 40rpx 0;
+	justify-content: center
+}
+
+.container .common-mask .common-pop-board .cpb-content {
+	display: flex;
+	width: 88%;
+	color: #666;
+	font-size: 28rpx;
+	flex-wrap: wrap;
+	max-height: 688rpx;
+	overflow: scroll
+}
+
+.container .common-mask .common-pop-board .cpb-button {
+	display: inline-flex;
+	color: #333;
+	font-size: 36rpx;
+	background: linear-gradient(to right, #FF5145, #FFC067);
+	padding: 0 55rpx;
+	height: 72rpx;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	border-radius: 36rpx;
+	color: #fff;
+	font-size: 28rpx;
+	margin: 45rpx
+}
+
+.container .common-mask .common-pop-board .ex-title {
+	display: flex;
+	width: 100%;
+	color: #333;
+	font-size: 36rpx;
+	margin: 40rpx 0;
+	justify-content: center
+}
+
+.container .common-mask .common-pop-board .ex-content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	width: 100%
+}
+
+.container .common-mask .common-pop-board .ex-content .ex-cut {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	width: 52rpx;
+	height: 52rpx;
+	background-color: #D3D3D3;
+	border-radius: 26rpx;
+	color: #fff;
+	margin: 0 45rpx
+}
+
+.container .common-mask .common-pop-board .ex-content .ex-cut .ex-c-on {
+	margin-bottom: 6rpx
+}
+
+.container .common-mask .common-pop-board .ex-content .ex-sum {
+	font-size: 32rpx;
+	color: #FF7E53;
+	display: inline-block
+}
+
+.container .common-mask .common-pop-board .ex-content .ex-add {
+	display: inline-flex;
+	margin: 0 45rpx;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	width: 52rpx;
+	height: 52rpx;
+	background-color: #D3D3D3;
+	border-radius: 26rpx;
+	color: #fff
+}
+
+.container .common-mask .common-pop-board .ex-content .ex-add .ex-a-on {
+	margin-bottom: 6rpx
+}
+
+.container .common-mask .common-pop-board .ex-content .ex-btn-on {
+	background-color: #FF624A
+}
+
+.container .common-mask .common-pop-board .ex-desc {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	align-content: center;
+	margin: 40rpx 0;
+	line-height: 1.6
+}
+
+.container .common-mask .common-pop-board .ex-desc .desc {
+	display: inline-flex;
+	width: 80%;
+	justify-content: flex-start;
+	font-size: 28rpx;
+	color: #666666
+}
+
+.container .common-mask .common-pop-board .desc-on {
+	margin: 20rpx 0
+}
+
+.container .common-mask .common-pop-board .copy-board {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	align-content: center;
+	margin: 20rpx 0
+}
+
+.container .common-mask .common-pop-board .copy-board .copy-content {
+	display: inline-flex;
+	width: 80%;
+	justify-content: space-between;
+	align-items: center;
+	align-content: center;
+	height: 64rpx;
+	border-radius: 32rpx;
+	background-color: #F2F2F2;
+	font-size: 28rpx;
+	color: #666666;
+	position: relative
+}
+
+.container .common-mask .common-pop-board .copy-board .copy-content .copy-title {
+	display: inline-block;
+	margin-left: 14rpx
+}
+
+.container .common-mask .common-pop-board .copy-board .copy-content .copy-btnName {
+	display: inline-flex;
+	width: 106rpx;
+	height: 44rpx;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+	border: 2rpx solid #FF5D48;
+	color: #FF5D48;
+	border-radius: 22rpx;
+	margin-right: 20rpx
+}
+
+.container .common-mask .common-pop-board .ex-footer {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: nowrap;
+	align-content: center;
+	margin: 10rpx 0 40rpx 0
+}
+
+.container .common-mask .common-pop-board .ex-footer .ex-button-cancel {
+	box-sizing: border-box;
+	display: inline-flex;
+	color: #333;
+	font-size: 36rpx;
+	background-color: #fff;
+	border: 2rpx solid #FF7E53;
+	padding: 0 55rpx;
+	height: 72rpx;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	border-radius: 36rpx;
+	color: #FF7E53;
+	font-size: 28rpx;
+	margin: 15rpx
+}
+
+.container .common-mask .common-pop-board .ex-footer .ex-button-confirm {
+	display: inline-flex;
+	color: #333;
+	font-size: 36rpx;
+	background: linear-gradient(to right, #FF5145, #FFC067);
+	padding: 0 55rpx;
+	height: 72rpx;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	border-radius: 36rpx;
+	color: #fff;
+	font-size: 28rpx;
+	margin: 15rpx
+}
+
+/**********/
+

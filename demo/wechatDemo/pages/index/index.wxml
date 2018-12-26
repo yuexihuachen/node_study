@@ -1,0 +1,21 @@
+<import src="../../templates/model.wxml"/>
+
+<view class="container {{isFixedBody}}">
+   <scroll-view class="scroll-view_H" scroll-x style="width: 100%;height:2000rpx;">
+
+    <header bind:onparentclick="onParentClick" inner-back="{{header.back}}">
+      <view bindtap='onParentClick'>头部</view>
+    </header>
+
+    <content>
+      <content-item inner-list="{{list}}"></content-item>
+    </content>
+    <content>
+      <content-item inner-list="{{onelist}}"></content-item>
+    </content>
+
+    <button bindtap="onScroll">scorll</button>
+    
+  </scroll-view>
+  <template is="mask" data="{{...model}}"/>
+</view>
