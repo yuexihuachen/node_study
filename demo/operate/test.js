@@ -500,84 +500,84 @@
 // // 换一批老婆
 // getWife("超越韦小宝的老婆");
 
-function Promise(fn) {
-  console.log(fn)
-  var state = 'pending',
-      value = null,
-      callbacks = [];  //callbacks为数组，因为可能同时有很多个回调
+// function Promise(fn) {
+//   console.log(fn)
+//   var state = 'pending',
+//       value = null,
+//       callbacks = [];  //callbacks为数组，因为可能同时有很多个回调
 
-  this.then = function (onFulfilled,onRejected) {
-    return new Promise(function(resolve,reject) {
-        handle({
-            onFulfilled: onFulfilled || null,
-            onRejected: onRejected || null,
-            resolve: resolve,
-            reject: reject
-        });
-    });
-  };
+//   this.then = function (onFulfilled,onRejected) {
+//     return new Promise(function(resolve,reject) {
+//         handle({
+//             onFulfilled: onFulfilled || null,
+//             onRejected: onRejected || null,
+//             resolve: resolve,
+//             reject: reject
+//         });
+//     });
+//   };
 
-  function handle(callback){
-    if (state === 'pending') {
-        callbacks.push(callback);
-        return ;
-    }
+//   function handle(callback){
+//     if (state === 'pending') {
+//         callbacks.push(callback);
+//         return ;
+//     }
 
-    var cb = state === 'fulfilled' ? callback.onFulfilled : callback.onRejected,
-        ret;
-    if (cb === null) {
-        cb = state === 'fulfilled' ? callback.resolve : callback.reject;
-        cb(value);
-        return;
-    }
-    try {
-        ret = cb(value);
-        callback.resolve(ret);
-    } catch (e) {
-        callback.reject(e);
-    } 
+//     var cb = state === 'fulfilled' ? callback.onFulfilled : callback.onRejected,
+//         ret;
+//     if (cb === null) {
+//         cb = state === 'fulfilled' ? callback.resolve : callback.reject;
+//         cb(value);
+//         return;
+//     }
+//     try {
+//         ret = cb(value);
+//         callback.resolve(ret);
+//     } catch (e) {
+//         callback.reject(e);
+//     } 
 
-  }
+//   }
 
-  function resolve(newValue) {
-    // if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
-    //     var then = newValue.then;
-    //     if (typeof then === 'function') {
-    //         then.call(newValue, resolve);
-    //         return;
-    //     }
-    // }
-    value = newValue;
-    state = 'fulfilled';
-    execute();
-  }
+//   function resolve(newValue) {
+//     // if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
+//     //     var then = newValue.then;
+//     //     if (typeof then === 'function') {
+//     //         then.call(newValue, resolve);
+//     //         return;
+//     //     }
+//     // }
+//     value = newValue;
+//     state = 'fulfilled';
+//     execute();
+//   }
 
-  function reject(reason) {
-      state = 'rejected';
-      value = reason;
-      execute();
-  }
+//   function reject(reason) {
+//       state = 'rejected';
+//       value = reason;
+//       execute();
+//   }
 
-  function execute() {
-      setTimeout(function () {
-          callbacks.forEach(function (callback) {
-              handle(callback);
-          });
-      }, 0);
-  }
+//   function execute() {
+//       setTimeout(function () {
+//           callbacks.forEach(function (callback) {
+//               handle(callback);
+//           });
+//       }, 0);
+//   }
 
-  fn(resolve, reject);
-}
+//   fn(resolve, reject);
+// }
 
-//例1
-function getUserId() {
-  return new Promise(function(resolve) {
-      //异步请求
-      setTimeout(function(){
-        resolve(123);
-      },0)
-  });
-}
+// //例1
+// function getUserId() {
+//   return new Promise(function(resolve) {
+//       //异步请求
+//       setTimeout(function(){
+//         resolve(123);
+//       },0)
+//   });
+// }
 
 
 // 例2
@@ -586,6 +586,8 @@ function getUserId() {
 //   // 一些处理
 //   console.log(id)
 // })
+
+/**********************************************************/
 
 var PENDING = 0;
 var FULFILLED = 1;
@@ -596,10 +598,15 @@ function Person(fn){
         value = null,
         callbacks = [];  //callbacks为数组，因为可能同时有很多个回调
 
-    this.then=function(onFulfilled){
-        handle({
-            onFulfilled:onFulfilled || null
-        });
+    this.then=function(onFulfilled,onRejected){
+        return new Person(function(resolve,reject){
+            handle({
+                onFulfilled:onFulfilled || null,
+                onRejected:onRejected || null,
+                resolve:resolve,
+                reject:reject
+            });
+        })
     }
 
     function handle(callback){
@@ -610,12 +617,40 @@ function Person(fn){
         }
 
         if(state===FULFILLED){
-            callback.onFulfilled(value);
+            if (typeof callback.onFulfilled === 'function') {
+                try {
+                    callback.resolve(callback.onFulfilled(value));
+                } catch (ex) {
+                    callback.reject(ex);
+                }
+            } else {
+                return callback.resolve(value);
+            }
         }
 
+        if(state===REJECTED){
+            if (typeof callback.onRejected === 'function') {
+                try {
+                    callback.resolve(callback.onRejected(value));
+                } catch (ex) {
+                    callback.reject(ex);
+                }
+            } else {
+                return callback.reject(value);
+            }
+        }
     }
 
     function resolve(newValue) {
+        var t = typeof newValue;
+        if (newValue && (t === 'object' || t === 'function')) {
+            var then = newValue.then;
+            if (typeof then === 'function') {
+                then.bind(newValue)(resolve);
+                return then;
+            }
+        }
+
         value=newValue;
         state=FULFILLED;
         
@@ -625,6 +660,7 @@ function Person(fn){
     function reject(error) {
         value=error;
         state=REJECTED;
+
         execute();
     }
 
@@ -639,12 +675,15 @@ function Person(fn){
     fn(resolve,reject);
 }
 
-let p=new Person(function(resolve,reject){
-    setTimeout(function(){
-        resolve('settimeout');
-    },0);
-});
+let p=function(){
+    return new Person(function(resolve,reject){
+        setTimeout(function(){
+            resolve('settimeout');
+        },0);
+    })
+};
 
-p.then(function(name){
+p().then(p).then(function(name){
     console.log(name)
-});
+})
+
