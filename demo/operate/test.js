@@ -589,101 +589,148 @@
 
 /**********************************************************/
 
-var PENDING = 0;
-var FULFILLED = 1;
-var REJECTED = 2;
+// var PENDING = 0;
+// var FULFILLED = 1;
+// var REJECTED = 2;
 
-function Person(fn){
-    var state = PENDING,
-        value = null,
-        callbacks = [];  //callbacks为数组，因为可能同时有很多个回调
+// function Person(fn){
+//     var state = PENDING,
+//         value = null,
+//         callbacks = [];  //callbacks为数组，因为可能同时有很多个回调
 
-    this.then=function(onFulfilled,onRejected){
-        return new Person(function(resolve,reject){
-            handle({
-                onFulfilled:onFulfilled || null,
-                onRejected:onRejected || null,
-                resolve:resolve,
-                reject:reject
-            });
-        })
-    }
+//     this.then=function(onFulfilled,onRejected){
+//         return new Person(function(resolve,reject){
+//             handle({
+//                 onFulfilled:onFulfilled || null,
+//                 onRejected:onRejected || null,
+//                 resolve:resolve,
+//                 reject:reject
+//             });
+//         })
+//     }
 
-    function handle(callback){
+//     function handle(callback){
+//         if(state===PENDING){
+//             callbacks.push(callback);
+//             return ;
+//         }
 
-        if(state===PENDING){
-            callbacks.push(callback);
-            return ;
-        }
+//         if(state===FULFILLED){
+//             if (typeof callback.onFulfilled === 'function') {
+//                 try {
+//                     let ret=callback.onFulfilled(value);
+//                     if(ret){
+//                         callback.resolve(ret);
+//                     }
+//                 } catch (ex) {
+//                     callback.reject(ex);
+//                 }
+//             } else {
+//                 return callback.resolve(value);
+//             }
+//         }
 
-        if(state===FULFILLED){
-            if (typeof callback.onFulfilled === 'function') {
-                try {
-                    callback.resolve(callback.onFulfilled(value));
-                } catch (ex) {
-                    callback.reject(ex);
-                }
-            } else {
-                return callback.resolve(value);
-            }
-        }
+//         if(state===REJECTED){
+//             if (typeof callback.onRejected === 'function') {
+//                 try {
+//                     callback.resolve(callback.onRejected(value));
+//                 } catch (ex) {
+//                     callback.reject(ex);
+//                 }
+//             } else {
+//                 return callback.reject(value);
+//             }
+//         }
+//     }
 
-        if(state===REJECTED){
-            if (typeof callback.onRejected === 'function') {
-                try {
-                    callback.resolve(callback.onRejected(value));
-                } catch (ex) {
-                    callback.reject(ex);
-                }
-            } else {
-                return callback.reject(value);
-            }
-        }
-    }
+//     function resolve(newValue) {
+//         var t = typeof newValue;
+//         if (newValue && (t === 'object' || t === 'function')) {
+//             var then = newValue.then;
+//             if (typeof then === 'function') {
+//                 then.bind(newValue)(resolve);
+//                 return then;
+//             }
+//         }
 
-    function resolve(newValue) {
-        var t = typeof newValue;
-        if (newValue && (t === 'object' || t === 'function')) {
-            var then = newValue.then;
-            if (typeof then === 'function') {
-                then.bind(newValue)(resolve);
-                return then;
-            }
-        }
-
-        value=newValue;
-        state=FULFILLED;
+//         value=newValue;
+//         state=FULFILLED;
         
-        execute();
+//         execute();
+//     }
+
+//     function reject(error) {
+//         value=error;
+//         state=REJECTED;
+
+//         execute();
+//     }
+
+//     function execute(){
+//         setTimeout(function(){
+//             callbacks.forEach(function(itemFun){
+//                 handle(itemFun);
+//             })
+//         },3);
+//     }
+
+//     fn(resolve,reject);
+// }
+
+// let p=function(){
+//     return new Person(function(resolve,reject){
+//         //异步模块处理
+//         setTimeout(function(){
+//             resolve('settimeout');
+//         },0);
+//     })
+// };
+// //.then(p)
+// let a=p();
+// a.name="a-name";
+// console.log("a:",a);
+// let b=a.then(a);
+// b.name="b-name";
+// console.log("b:",b)
+// a.then(function(name){
+//     console.log(name);
+// })
+
+var thunkify = function(fn){
+    return function(){
+      var args = new Array(arguments.length);
+      var ctx = this;
+  
+      for(var i = 0; i < args.length; ++i) {
+        args[i] = arguments[i];
+      }
+      
+      return function(done){
+        var called;
+
+        args.push(function(){
+          if (called) return;
+          called = true;
+          
+          done.apply(null, arguments);
+        });
+        try {
+          fn.apply(ctx, args);
+        } catch (err) {
+          done(err);
+        }
+      }
+
+
     }
+  };
 
-    function reject(error) {
-        value=error;
-        state=REJECTED;
-
-        execute();
-    }
-
-    function execute(){
-        setTimeout(function(){
-            callbacks.forEach(function(itemFun){
-                handle(itemFun);
-            })
-        },3);
-    }
-
-    fn(resolve,reject);
-}
-
-let p=function(){
-    return new Person(function(resolve,reject){
-        setTimeout(function(){
-            resolve('settimeout');
-        },0);
-    })
-};
-
-p().then(p).then(function(name){
-    console.log(name)
-})
-
+  function f(a, b, callback){
+    var sum = a + b;
+    callback(sum);
+    callback(sum);
+  }
+  
+  var ft = thunkify(f);
+  ft(1, 2)(console.log); 
+  // 3
