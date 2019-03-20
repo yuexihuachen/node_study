@@ -501,7 +501,6 @@
 // getWife("超越韦小宝的老婆");
 
 // function Promise(fn) {
-//   console.log(fn)
 //   var state = 'pending',
 //       value = null,
 //       callbacks = [];  //callbacks为数组，因为可能同时有很多个回调
@@ -540,13 +539,13 @@
 //   }
 
 //   function resolve(newValue) {
-//     // if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
-//     //     var then = newValue.then;
-//     //     if (typeof then === 'function') {
-//     //         then.call(newValue, resolve);
-//     //         return;
-//     //     }
-//     // }
+//     if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
+//         var then = newValue.then;
+//         if (typeof then === 'function') {
+//             then.call(newValue, resolve);
+//             return;
+//         }
+//     }
 //     value = newValue;
 //     state = 'fulfilled';
 //     execute();
@@ -579,13 +578,8 @@
 //   });
 // }
 
-
-// 例2
-//let a=getUserId();
-// a.then(function(id) {
-//   // 一些处理
-//   console.log(id)
-// })
+// let a=getUserId();
+// a.then(getUserId);
 
 /**********************************************************/
 
@@ -685,52 +679,197 @@
 //         },0);
 //     })
 // };
-// //.then(p)
-// let a=p();
-// a.name="a-name";
-// console.log("a:",a);
-// let b=a.then(a);
-// b.name="b-name";
-// console.log("b:",b)
-// a.then(function(name){
+
+// p().then(function(name){
 //     console.log(name);
 // })
 
-var thunkify = function(fn){
-    return function(){
-      var args = new Array(arguments.length);
-      var ctx = this;
+// var thunkify = function(fn){
+//     return function(){
+//       var args = new Array(arguments.length);
+//       var ctx = this;
   
-      for(var i = 0; i < args.length; ++i) {
-        args[i] = arguments[i];
-      }
+//       for(var i = 0; i < args.length; ++i) {
+//         args[i] = arguments[i];
+//       }
       
-      return function(done){
-        var called;
+//       return function(done){
+//         var called;
 
-        args.push(function(){
-          if (called) return;
-          called = true;
+//         args.push(function(){
+//           if (called) return;
+//           called = true;
           
-          done.apply(null, arguments);
-        });
-        try {
-          fn.apply(ctx, args);
-        } catch (err) {
-          done(err);
-        }
-      }
+//           done.apply(null, arguments);
+//         });
+//         try {
+//           fn.apply(ctx, args);
+//         } catch (err) {
+//           done(err);
+//         }
+//       }
 
 
-    }
-  };
+//     }
+//   };
 
-  function f(a, b, callback){
-    var sum = a + b;
-    callback(sum);
-    callback(sum);
-  }
+//   function f(a, b, callback){
+//     var sum = a + b;
+//     callback(sum);
+//     callback(sum);
+//   }
   
-  var ft = thunkify(f);
-  ft(1, 2)(console.log); 
-  // 3
+//   var ft = thunkify(f);
+//   ft(1, 2)(console.log); 
+
+
+
+// var box3=document.getElementById("box3");
+
+// document.getElementById('count').addEventListener("click",function(){
+
+//   Promise.resolve().then(()=>{
+//     console.log('mic1')
+//   })
+//   console.log('lis 1')
+
+// })
+
+// document.getElementById('count').addEventListener("click",function(){
+
+//   Promise.resolve().then(()=>{
+//     console.log('mic2')
+//   })
+//   console.log('lis 2')
+
+// })
+
+// document.getElementById('count').click();
+
+// var count=0;
+// var width=document.documentElement.clientWidth-50;
+
+// function moveBox1ForwradOnePixel(el){
+//   if(count>width){
+//     count=0;
+//   }
+//   el.style.left= ++count+'px';
+// }
+
+// function callback1(){
+//   moveBox1ForwradOnePixel(document.getElementById("box1"));
+//   requestAnimationFrame(callback1);
+// }
+
+// //callback1();
+
+// function callback2(){
+//   moveBox1ForwradOnePixel(document.getElementById("box2"));
+//   setTimeout(callback2,1000/60)
+// }
+
+// //callback2();
+
+
+
+// var box=document.getElementById("box");
+
+// box.addEventListener("click",function(){
+//   console.log('timer1')
+//   Promise.resolve().then(function () {
+//     console.log('promise1')
+//   })
+// })
+
+// box.addEventListener("click",function(){
+//   console.log('timer2')
+//   Promise.resolve().then(function () {
+//     console.log('promise2')
+//   })
+// })
+
+
+let arrayList=[3,5,2,1];
+
+/**
+ * @param {Array} 冒泡
+ * */
+function bubbleSort(arr) {
+    var len = arr.length;   
+    for (var i = 0; i < len - 1; i++) {   
+        for (var j = 0; j < len - 1 - i; j++) {   
+            console.log(arr)
+            if (arr[j] > arr[j+1]) {        // 相邻元素两两对比   
+                var temp = arr[j+1];        // 元素交换   
+                arr[j+1] = arr[j];   
+                arr[j] = temp;   
+            }   
+        }   
+    }   
+    return arr; 
+}
+
+/**
+ * @param {Array} 选择
+ **/
+function selectionSort(list) {
+    var len=list.length;
+    var minIndex,temp;
+    for(var i=0;i<len-1;i++){
+        minIndex=i;
+        for(var j=i+1;j<len;j++){
+            if(list[j]<list[minIndex]){
+                minIndex=j;
+            }
+        }
+        console.log(list,list[minIndex])
+        temp=list[i];
+        list[i]=list[minIndex];
+        list[minIndex]=temp;
+    }
+    return list;
+}
+
+// function selectionSort(list) {
+//     var len = list.length;   
+//     var minIndex,temp;
+//     for (var i = 0; i < len - 1; i++) {   
+//         minIndex=i;
+//         for (var j = 0; j < len; j++) {   
+//             if(list[j]<list[minIndex]){
+//                 minIndex=j;
+//             }
+//             console.log(list,minIndex)
+//         }         
+//         var temp = list[i];        
+//         list[i] = list[minIndex];   
+//         list[minIndex] = temp;   
+        
+//     }   
+//     return list; 
+// }
+
+/**
+ * @param {Array} 选择
+ **/
+function insertionSort(list) {
+    var len = list.length;   
+    var prevIndex,
+        current;
+    for (var i = 1; i < len; i++) {   
+        prevIndex=i-1;
+        current=list[i];
+        
+        while(prevIndex>=0 && list[prevIndex] > current){
+            console.log(list)
+            list[prevIndex+1]=list[prevIndex];
+            prevIndex--;
+        }
+        list[prevIndex+1]=current;
+        
+    }   
+    return list; 
+}
+
+
+console.log(selectionSort(arrayList))
