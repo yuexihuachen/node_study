@@ -12,5 +12,8 @@
     "fs": "^0.0.1-security",
     "thunkify": "^2.1.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "koa-webpack": "^5.2.2",
+    "webpack-hot-middleware": "^2.24.3"
+  }
 }

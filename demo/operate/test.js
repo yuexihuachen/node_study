@@ -240,7 +240,7 @@
 //       },
 //       remove:function(key,fn){
 //         var fns=clientList[key];
-    
+
 //         if(!fns){
 //           return false;
 //         } else {
@@ -264,10 +264,10 @@
 
 //     },
 //     trigger:function(){
-      
+
 //     },
 //     remove:function(){
-      
+
 //     }
 //   }
 
@@ -649,7 +649,7 @@
 
 //         value=newValue;
 //         state=FULFILLED;
-        
+
 //         execute();
 //     }
 
@@ -688,18 +688,18 @@
 //     return function(){
 //       var args = new Array(arguments.length);
 //       var ctx = this;
-  
+
 //       for(var i = 0; i < args.length; ++i) {
 //         args[i] = arguments[i];
 //       }
-      
+
 //       return function(done){
 //         var called;
 
 //         args.push(function(){
 //           if (called) return;
 //           called = true;
-          
+
 //           done.apply(null, arguments);
 //         });
 //         try {
@@ -718,7 +718,7 @@
 //     callback(sum);
 //     callback(sum);
 //   }
-  
+
 //   var ft = thunkify(f);
 //   ft(1, 2)(console.log); 
 
@@ -789,46 +789,46 @@
 // })
 
 
-let arrayList=[3,5,2,1];
+// let arrayList=[3,5,2,1];
 
-/**
- * @param {Array} 冒泡
- * */
-function bubbleSort(arr) {
-    var len = arr.length;   
-    for (var i = 0; i < len - 1; i++) {   
-        for (var j = 0; j < len - 1 - i; j++) {   
-            console.log(arr)
-            if (arr[j] > arr[j+1]) {        // 相邻元素两两对比   
-                var temp = arr[j+1];        // 元素交换   
-                arr[j+1] = arr[j];   
-                arr[j] = temp;   
-            }   
-        }   
-    }   
-    return arr; 
-}
+// /**
+//  * @param {Array} 冒泡
+//  * */
+// function bubbleSort(arr) {
+//     var len = arr.length;   
+//     for (var i = 0; i < len - 1; i++) {   
+//         for (var j = 0; j < len - 1 - i; j++) {   
+//             console.log(arr)
+//             if (arr[j] > arr[j+1]) {        // 相邻元素两两对比   
+//                 var temp = arr[j+1];        // 元素交换   
+//                 arr[j+1] = arr[j];   
+//                 arr[j] = temp;   
+//             }   
+//         }   
+//     }   
+//     return arr; 
+// }
 
-/**
- * @param {Array} 选择
- **/
-function selectionSort(list) {
-    var len=list.length;
-    var minIndex,temp;
-    for(var i=0;i<len-1;i++){
-        minIndex=i;
-        for(var j=i+1;j<len;j++){
-            if(list[j]<list[minIndex]){
-                minIndex=j;
-            }
-        }
-        console.log(list,list[minIndex])
-        temp=list[i];
-        list[i]=list[minIndex];
-        list[minIndex]=temp;
-    }
-    return list;
-}
+// /**
+//  * @param {Array} 选择
+//  **/
+// function selectionSort(list) {
+//     var len=list.length;
+//     var minIndex,temp;
+//     for(var i=0;i<len-1;i++){
+//         minIndex=i;
+//         for(var j=i+1;j<len;j++){
+//             if(list[j]<list[minIndex]){
+//                 minIndex=j;
+//             }
+//         }
+//         console.log(list,list[minIndex])
+//         temp=list[i];
+//         list[i]=list[minIndex];
+//         list[minIndex]=temp;
+//     }
+//     return list;
+// }
 
 // function selectionSort(list) {
 //     var len = list.length;   
@@ -844,32 +844,299 @@ function selectionSort(list) {
 //         var temp = list[i];        
 //         list[i] = list[minIndex];   
 //         list[minIndex] = temp;   
-        
+
 //     }   
 //     return list; 
 // }
 
-/**
- * @param {Array} 选择
- **/
-function insertionSort(list) {
-    var len = list.length;   
-    var prevIndex,
-        current;
-    for (var i = 1; i < len; i++) {   
-        prevIndex=i-1;
-        current=list[i];
-        
-        while(prevIndex>=0 && list[prevIndex] > current){
-            console.log(list)
-            list[prevIndex+1]=list[prevIndex];
-            prevIndex--;
+// /**
+//  * @param {Array} 选择
+//  **/
+// function insertionSort(list) {
+//     var len = list.length;   
+//     var prevIndex,
+//         current;
+//     for (var i = 1; i < len; i++) {   
+//         prevIndex=i-1;
+//         current=list[i];
+
+//         while(prevIndex>=0 && list[prevIndex] > current){
+//             console.log(list)
+//             list[prevIndex+1]=list[prevIndex];
+//             prevIndex--;
+//         }
+//         list[prevIndex+1]=current;
+
+//     }   
+//     return list; 
+// }
+
+
+// console.log(selectionSort(arrayList))
+
+
+// var Duck=function(){}
+
+// Duck.prototype.sound=function(){
+//     console.log('嘎嘎嘎')
+// }
+// var Chicken=function(){}
+
+// Chicken.prototype.sound=function(){
+//     console.log('嘎嘎嘎')
+// }
+
+// var sounds=[];
+
+// var makeSounds=function(ins){
+//     if('sound' in ins){
+//         ins.sound();
+//         sounds.push(ins);
+//     }
+// }
+
+// makeSounds(new Duck());
+
+// makeSounds(new Chicken());
+
+
+// Function.prototype.bind = function () {//实现了函数柯里化
+//     var self = this, 
+//         context = [].shift.call(arguments),
+//         args = [].slice.call(arguments); 
+//     return function () { 
+//         return self.apply(context, [].concat.call(args, [].slice.call(arguments)));
+//     }
+// };
+
+// var obj = {
+//     name: 'sven'
+// };
+// var name="window";
+// var func = function (a, b, c, d) {
+//     console.log(this.name); // 输出:sven
+//     console.log([a, b, c, d]) // 输出:[ 1, 2, 3, 4 ]
+// }.bind(null, 1, 2); 
+
+// func(3, 4);
+
+
+
+// Function.prototype.before=function(fn){
+//     let beforefun=fn;  //before
+//     let self=this; //保存原函数
+//     return function(){
+//         beforefun.apply(this,arguments);
+//         return self.apply(this,arguments);
+//     }
+// }
+
+// Function.prototype.after=function(fn){
+//     let self=this;
+//     let afterfun=fn;
+//     return function(){
+//         let ret=self.apply(this,arguments);
+//         afterfun.apply(this,arguments);
+//         return ret;
+//     }
+// }
+
+// var func = function () {
+//     console.log(2);
+// };
+
+// func = func.before(function () {
+//     console.log(1);
+// }).after(function () {
+//     console.log(3);
+// }); 
+
+// func();
+
+// function curry(fn) {
+//     var args = Array.prototype.slice.call(arguments, 1);
+//     return function () {
+//         var innerArgs = Array.prototype.slice.call(arguments);
+//         var finalArgs = args.concat(innerArgs);
+//         return fn.apply(null, finalArgs);
+//     };
+// }
+
+// function add(num1, num2){
+//     return num1 + num2;
+// }
+// var curriedAdd = curry(add, 5,6,7);
+// alert(curriedAdd(3));   //8
+
+// function Person(name){
+//     this.name=name;
+// }
+
+// Person.prototype.sayName=function(){
+//     console.log(this.name)
+// }
+
+// let getSingle=function(fn){
+//     let instance;
+//     return function(){
+//         return instance=fn.apply(this,arguments);
+//     }
+// }
+
+// let p=new Person('test');
+// let res=getSingle(p.sayName);
+// res();
+
+// let Hua=function(){}
+
+// let xiaoming={
+//     songhua:function(target){
+//         let hua=new Hua();
+//         target.receive(hua)
+//     }
+// }
+
+// let B={
+//     receive:function(hua){
+//         A.listen(function(){
+//             A.receive(hua);
+//         })
+//     }
+// }
+
+// let A={
+//     listen:function(fn){
+//         setTimeout(fn,10000);
+//     },
+//     receive:function(hua){
+//         console.log("收到花")
+//     }
+// }
+
+// xiaoming.songhua(B);
+
+// let myImage=(function(){
+//     let img=document.createElement('img');
+//     document.body.appendChild(img);
+//     return {
+//         setImage:function(src){
+//             img.src=src;
+//         }
+//     }
+// })();
+
+// let proxyImage=(function(){
+//     let img= new Image();
+//     img.onload=function(){
+//         myImage.setImage(this.src);
+//     }
+//     return {
+//         setImage:function(src){
+//             myImage.setImage('./test.jpeg');
+//             img.src=src;
+//         }
+//     }
+// })();
+
+// proxyImage.setImage('http://p2.music.126.net/Jv78zFs7VIQgka5QWoQk9Q==/109951163919513453.jpg?param=140y140')
+
+
+// Function.prototype.before=function(fn){
+//     let _self=this;//保存原函数引用
+//     let beforefn=fn;
+//     return function(){
+//         beforefn.apply(this,arguments);
+//         return _self.apply(this,arguments);
+//     }
+// };
+
+// Function.prototype.after=function(fn){
+//     let _self=this;
+//     let afterfn=fn;
+//     return function(){
+//         let _ret=_self.apply(this,arguments);
+//         afterfn.apply(this,arguments);
+//         return _ret;
+//     }
+// }
+
+
+
+// var button = document.getElementById('count');
+
+// button.onclick=(function(){
+//     console.log('触发函数')
+// }).after(function(){
+//     console.log('上报数据')
+// })
+
+let event={
+    clients:[],
+    listen:function(key,fn){
+        if(!this.clients[key]){
+            this.clients[key]=[];
         }
-        list[prevIndex+1]=current;
-        
-    }   
-    return list; 
+        this.clients[key].push(fn);
+    },
+    remove:function(key,fn){
+        let fns=this.clients[key];
+        if(!fns){
+            return false;
+        } else {
+            fns.forEach(function(item,key,array){
+                if(fn===item){
+                    fns.splice(key,1);
+                }
+            })
+        }
+    },
+    trigger:function(){
+        let _self=this;
+        let args=arguments;
+        let key=Array.prototype.shift.call(arguments);
+        let fns=this.clients[key];
+        if(!fns || fns.length==0){
+            return false;
+        }
+        fns.forEach(function(item,key,array){
+            item.apply(this,args);
+        })
+    }
+};
+
+var salesOffices={};
+
+var installEvent=function(obj){
+    for(let i in event){
+        obj[i]=event[i];
+    }
 }
+installEvent(salesOffices);
 
+salesOffices.trigger('120',1200000);
+salesOffices.trigger('140',1400000);
 
-console.log(selectionSort(arrayList))
+let fn1=function(price){
+    console.log("fn1-价格",price);
+};
+
+salesOffices.listen('88',fn1);
+
+let fn3=function(price){
+    console.log("fn3-价格",price);
+};
+
+salesOffices.listen('88',fn3);
+
+let fn2=function(price){
+    console.log("价格",price);
+};
+
+salesOffices.listen('100',fn2);
+
+//salesOffices.remove('88',fn1);
+
+salesOffices.trigger('100',1000000);
+salesOffices.trigger('88',880000);
+
+salesOffices.listen('120',fn2);
