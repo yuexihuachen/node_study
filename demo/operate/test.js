@@ -1070,13 +1070,26 @@
 //     console.log('上报数据')
 // })
 
+/*
 let event={
     clients:[],
+    offlineStack:[],
     listen:function(key,fn){
+        let _self=this;
         if(!this.clients[key]){
             this.clients[key]=[];
         }
+
         this.clients[key].push(fn);
+
+        if(_self.offlineStack[key]){
+            _self.offlineStack[key].forEach(function(item,index){
+                item.apply(fn,arguments);
+            })
+            delete _self.offlineStack[key];
+        }
+
+        
     },
     remove:function(key,fn){
         let fns=this.clients[key];
@@ -1095,9 +1108,20 @@ let event={
         let args=arguments;
         let key=Array.prototype.shift.call(arguments);
         let fns=this.clients[key];
+
+        if((!fns || fns.length==0) && _self.offlineStack){
+            if(!_self.offlineStack[key]){
+                _self.offlineStack[key]=[];
+            }
+            _self.offlineStack[key].push(function(item){
+                 this.apply(_self,args);
+            });
+        }
+
         if(!fns || fns.length==0){
             return false;
         }
+
         fns.forEach(function(item,key,array){
             item.apply(this,args);
         })
@@ -1113,7 +1137,7 @@ var installEvent=function(obj){
 }
 installEvent(salesOffices);
 
-salesOffices.trigger('120',1200000);
+
 salesOffices.trigger('140',1400000);
 
 let fn1=function(price){
@@ -1128,15 +1152,275 @@ let fn3=function(price){
 
 salesOffices.listen('88',fn3);
 
-let fn2=function(price){
-    console.log("价格",price);
-};
-
-salesOffices.listen('100',fn2);
-
-//salesOffices.remove('88',fn1);
-
-salesOffices.trigger('100',1000000);
 salesOffices.trigger('88',880000);
 
-salesOffices.listen('120',fn2);
+salesOffices.listen('140',fn3);
+
+*/
+
+let Event=(function(){
+    let _shift=Array.prototype.shift,
+        _unshift=Array.prototype.unshift,
+        namespaceCache={},
+        each=function(stack,fn){
+            stack.forEach((item,index) => {
+                fn.apply(item,arguments)
+            });
+        };
+
+    let _create=function(){
+        let namespace=_shift.call(arguments) || 'defaultNameSpace',
+            clientsCache=[];
+
+        let ret={
+            trigger:function(){
+                let args=arguments;
+                let key=_shift.call(arguments),
+                    fns=clientsCache[key];
+                if(!fns || fns.length===0){
+                    return ;
+                }
+                each(fns,function(){
+                    this.apply(this,args);
+                })
+                // fns.forEach(element => {
+                //     element.apply(this,arguments);
+                // });
+            },
+            listen:function(){
+                let key=_shift.call(arguments);
+                fn=_shift.call(arguments);
+                if(!clientsCache[key]){
+                    clientsCache[key]=[];
+                }
+                clientsCache[key].push(fn);
+            },
+            remove:function(){
+                let key=_shift.call(arguments);
+                let fn=_shift.call(arguments);
+                let fns=clientsCache[key];
+                if(!clientsCache[key]){
+                    return ;
+                } else {
+                    each(fns,function(item,index){
+                        if(item===fn){
+                            fns.splice(index,1);
+                        }
+                    });
+                    // fns.forEach((item,index) => {
+                    //     if(item===fn){
+                    //         fns.splice(index,1);
+                    //     }
+                    // });
+                }
+            }
+        }
+
+        return namespaceCache[namespace]?namespaceCache[namespace]:namespaceCache[namespace]=ret;
+
+    }
+
+    return {
+        create:_create,
+        trigger:function(){
+            var event=this.create();
+            return event.trigger.apply(this,arguments);
+        },
+        listen:function(){
+            var event=this.create();
+            return event.listen.apply(this,arguments);
+        },
+        remove:function(){
+            var event=this.create();
+            return event.remove.apply(this,arguments);
+        }
+    }
+
+})();
+
+let n1='namespace1',n2='namespace2';
+
+Event.create(n1).listen("click",fn1=function(data){
+    console.log(data,arguments.callee.name);
+});
+
+Event.create(n1).listen("click",fn2=function(data){
+    console.log(data,arguments.callee.name);
+});
+
+Event.create(n1).listen("click",fn3=function(data){
+    console.log(data,arguments.callee.name);
+});
+
+Event.create(n1).listen("click",fn4=function(data){
+    console.log(data,arguments.callee.name);
+});
+
+Event.create(n1).remove("click",fn2);
+
+
+Event.create(n1).trigger("click",1);
+
+Event.create(n1).listen("click",fn3=function(data){
+    console.log(data,arguments.callee.name);
+});
+
+Event.create(n2).listen("click",fn5=function(data){
+    console.log(data,arguments.callee.name);
+});
+
+Event.create(n2).trigger("click",2);
+
+Event.listen('click',fn6=function(data){
+    console.log(data,arguments.callee.name);
+})
+Event.listen('click',fn7=function(data){
+    console.log(data,arguments.callee.name);
+})
+Event.listen('click',fn8=function(data){
+    console.log(data,arguments.callee.name);
+})
+Event.remove("click",fn8)
+Event.trigger("click",'customer')
+
+
+
+/* 
+var Event = (function () {
+    var _listen,
+        _trigger,
+        _remove,
+        _shift = Array.prototype.shift,
+        _unshift = Array.prototype.unshift,
+        namespaceCache = {},
+        _create,
+        each = function (ary, fn) {
+            var ret;
+            for (var i = 0, l = ary.length; i < l; i++) {
+                var n = ary[i];
+                ret = fn.call(n, i);
+            }
+            return ret;
+        };
+
+    _listen = function (key, fn, cache) {//订阅的消息添加到缓存列表
+        //cache缓存订阅消息
+        if (!cache[key]) {
+            cache[key] = [];
+        }
+        cache[key].push(fn);
+    };
+
+    _remove = function (key, cache, fn) {//取消订阅事件
+        if (cache[key]) {
+            if (fn) {
+                for (var i = cache[key].length; i >= 0; i--) {
+                    if (cache[key][i] === fn) {
+                        cache[key].splice[i, 1];
+                    }
+                }
+            } else {
+                cache[key] = [];
+            }
+        }
+    };
+
+    _trigger = function () {//发布消息
+        var cache = _shift.call(arguments),//拿到缓存的订阅消息列表
+            key = _shift.call(arguments),//发布的消息名称
+            args = arguments,
+            _self = this,
+            stack = cache[key];//从缓存的订阅消息列表拿到当前发布的消息列表
+        //发布的消息没有订阅
+        if (!stack || !stack.length) {
+            return;
+        }
+        //执行发布后对应的订阅消息
+        return each(stack, function () {
+            return this.apply(_self, args);
+        });
+    };
+
+    _create = function (namespace) {
+        var namespace = namespace || 'default';
+        var cache = {},
+            offlineStack = [],
+            ret = {
+                listen: function (key, fn, last) {
+                    _listen(key, fn, cache);
+                    //离线的发布信息，未被订阅
+                    if (offlineStack === null) {
+                        return;
+                    }
+
+                    if (last === 'last') {
+                        offlineStack.length && offlineStack.pop()();
+                    } else {
+                        each(offlineStack, function () {
+                            this();
+                        });
+                    }
+
+                    offlineStack = null;
+                },
+                one: function (key, fn, last) {
+                    _remove(key, cache);
+                    this.listen(key, fn, last);
+                },
+                remove: function (key, fn) {
+                    _remove(key, cache, fn);
+                },
+                trigger: function () {
+                    //发布消息
+                    var fn,
+                        args,
+                        _self = this;
+                    _unshift.call(arguments, cache); //缓存的订阅消息列表合并到参数里
+                    //新的参数
+                    args = arguments;
+                    //发布消息
+                    fn = function () {
+                        return _trigger.apply(_self, args);
+                    };
+                    //是否有离线的发布消息
+                    if (offlineStack) {
+                        return offlineStack.push(fn);
+                    }
+                    //执行发布消息
+                    return fn();
+                }
+            };
+
+        return namespace ?
+            (namespaceCache[namespace] ? namespaceCache[namespace] : namespaceCache[namespace] = ret)
+            : ret;
+    };
+
+    return {
+        create: _create,
+        one: function (key, fn, last) {
+            var event = this.create();
+            event.one(key, fn, last);
+        },
+        remove: function (key, fn) {
+            var event = this.create();
+            event.remove(key, fn);
+        },
+        listen: function (key, fn, last) {
+            //创建
+            var event = this.create();
+            event.listen(key, fn, last);
+        },
+        trigger: function () {
+            var event = this.create();
+            event.trigger.apply(this, arguments);
+        }
+    };
+
+})();
+*/
+
+
+
+
+
