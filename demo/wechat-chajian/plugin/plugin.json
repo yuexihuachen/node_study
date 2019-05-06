@@ -1,0 +1,9 @@
+{
+  "publicComponents": {
+    "addlist":"components/addlist/index"
+  },
+  "pages": {
+    "home": "pages/home/index"
+  },
+  "main": "index.js"
+}

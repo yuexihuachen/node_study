@@ -1,2 +1,0 @@
-webpackHotUpdate(0,{45:function(e,t,u){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=u(2),o=u(44),c=function(e){return e&&e.__esModule?e:{default:e}}(o),d=u(93),n=(0,r.combineReducers)({counter:c.default,routing:d.routerReducer});t.default=n}});
-//# sourceMappingURL=0.30418dc30e6f8aa26960.hot-update.js.map

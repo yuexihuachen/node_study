@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>anai</title>
+  <script>
+    function resolveAfter2Seconds(x) {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve(x);
+        }, 2000);
+      });
+    };
+
+    // 分配给变量的异步函数表达式。
+    var add1 = async function (x) {
+      var a = await resolveAfter2Seconds(20);
+      var b = await resolveAfter2Seconds(30);
+      return x + a + b;
+    }
+
+    add1(10).then(v => {
+      console.log(v);  // 4 秒后打印 60
+    });
+
+    (async function (x) { // 用于IIFE的异步函数表达式。
+      var p_a = resolveAfter2Seconds(20);
+      var p_b = resolveAfter2Seconds(30);
+      console.log(typeof p_a)
+      var aa=await p_a;
+      var bb=await p_b;
+      return x + aa + bb;
+    })(10).then(v => {
+      console.log(v);  // 2 秒后打印 60
+    });
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

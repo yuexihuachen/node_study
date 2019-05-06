@@ -1,0 +1,52 @@
+html,body{
+    padding: 0;
+    margin: 0;
+}
+.box-flex{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: space-around;
+    background-color: #d4c9c9;
+    height: 200px;
+    width: 100%;
+}
+.flex-box1,.flex-box2,.flex-box3,.flex-box4,.flex-box5,.flex-box6{
+    width: 60px;
+    height: 60px;
+    border-radius: 4px;
+    background-color: #fff;
+    margin: 2px;
+}
+.dotted{
+    background-color: #333;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+.flex-box1{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-box2{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-content: space-around;
+    align-items:flex-start;
+}
+
+.flex-box3{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content:space-around;
+    align-items:center;
+    align-content: space-around;
+}

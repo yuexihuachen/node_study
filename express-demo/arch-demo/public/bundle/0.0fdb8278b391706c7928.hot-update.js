@@ -1,2 +1,0 @@
-webpackHotUpdate(0,{43:function(e,t,r){"use strict";function o(e){return e&&e.__esModule?e:{default:e}}var n=r(0),u=o(n),a=r(0),d=r(5),l=r(29),c=r(93),s=r(36),f=o(s),i=r(35),m=o(i),y=(r(37),document.getElementById("root")),p=f.default,E=(0,c.syncHistoryWithStore)(l.browserHistory,p);(0,a.render)(u.default.createElement(d.Provider,{store:p},u.default.createElement(l.Router,{history:E},u.default.createElement(l.Route,{path:"/",component:m.default}))),y)}});
-//# sourceMappingURL=0.0fdb8278b391706c7928.hot-update.js.map

@@ -76,8 +76,8 @@ function createCORSRequest(method, url){
 }
 
 
-
-var request = createCORSRequest("post", "http://m.ctrip.com/restapi/soa2/12568/search.json"); 
+//http://m.ctrip.com/restapi/soa2/12568/search.json
+var request = createCORSRequest("post", "http://137.116.141.39:3009/login"); 
 if (request){
     request.onload = function(res){
         //对 request.responseText 进行处理
@@ -95,4 +95,68 @@ onload	当请求成功时触发
 ontimeout	当调用者设定的超时时间已过而仍未成功时触发
 onloadend*	请求结束时触发（无论成功与否）
 注：带星号的表示IE的XDomainRequest仍不支持。
+*/
+
+/*
+;q= (q-factor weighting)
+值代表优先顺序，用相对质量价值 表示，又称为权重。
+
+Accept 请求头用来告知（服务器）客户端可以处理的内容类型
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng;q=0.8
+
+Accept-Charset 请求头用来告知（服务器）客户端可以处理的字符集类型。
+Accept-Charset: utf-8, iso-8859-1;q=0.5
+
+Accept-Encoding 请求头会将客户端能够理解的内容编码方式——通常是某种压缩算法——进行通知。
+Accept-Encoding: gzip, deflate, br
+
+Accept-Language请求头允许客户端声明它可以理解的自然语言，以及优先选择的区域方言。
+Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
+
+Cache-Control 通用消息头字段被用于在http请求和响应中通过指定指令来实现缓存机制。
+缓存指令是单向的,这意味着在请求设置的指令，在响应中不一定包含相同的指令。
+Response Headers
+Cache-Control: public,max-age=31536000
+Request Headers
+Cache-Control: max-age=0
+
+Connection 头（header） 决定当前的事务完成后，是否会关闭网络连接。
+Connection: keep-alive
+
+Content-Encoding 是一个实体消息首部，用于对特定媒体类型的数据进行压缩。
+Content-Encoding: gzip
+
+Content-Type 实体头部用于指示资源的MIME类型(多用途互联网邮件扩展类型)。
+--在响应中，Content-Type标头告诉客户端实际返回的内容的内容类型。
+Content-Type: text/html; charset=utf-8
+
+Content-Length 是一个实体消息首部，用来指明发送给接收方的消息主体的大小，即用十进制数字表示的八位元组的数目。
+Content-Length: <length>
+
+Cookie 是一个请求首部，其中含有先前由服务器通过Set-Cookie首部投放并存储到客户端的HTTP cookies。
+Cookie: name=value; name2=value2; name3=value3
+
+Date 是一个通用首部，其中包含了报文创建的日期和时间。
+Date: <day-name>, <day> <month> <year> <hour>:<minute>:<second> GMT
+
+ETagHTTP响应头是资源的特定版本的标识符。
+这可以让缓存更高效，并节省带宽，因为如果内容没有改变，Web服务器不需要发送完整的响应。
+如果给定URL中的资源更改，则一定要生成新的Etag值。 因此Etags类似于指纹，也可能被某些服务器用于跟踪。
+ETag: W/"<etag_value>"
+
+Expires 响应头包含日期/时间， 即在此时候之后，响应过期。
+Expires: <http-date>
+
+The Last-Modified  是一个响应首部，其中包含源头服务器认定的资源做出修改的日期及时间。 
+它通常被用作一个验证器来判断接收到的或者存储的资源是否彼此一致。由于精确度比  ETag 要低，所以这是一个备用机制。
+Last-Modified: Tue, 26 Feb 2019 07:24:24 GMT
+
+Server 首部包含了处理请求的源头服务器所用到的软件相关信息。
+Server: <product>
+
+User-Agent 首部包含了一个特征字符串，用来让网络协议的对端来识别发起请求的
+用户代理软件的应用类型、操作系统、软件开发商以及版本号。
+User-Agent: <product> / <product-version> <comment>
+
+
 */

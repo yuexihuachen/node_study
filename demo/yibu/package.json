@@ -1,0 +1,19 @@
+{
+  "name": "nodeapp",
+  "version": "0.0.1",
+  "description": "Node.js on Docker",
+  "author": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "fs": "^0.0.1-security",
+    "thunkify": "^2.1.2"
+  },
+  "devDependencies": {
+    "koa-webpack": "^5.2.2",
+    "webpack-hot-middleware": "^2.24.3"
+  }
+}

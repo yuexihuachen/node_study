@@ -43,9 +43,9 @@ class RootUi extends React.Component {
     console.log("shouldComponentUpdate");
   }
   handInName(){
-    const {fetchEatPosts} = this.props.data; 
+    const {fetchTypes} = this.props.data; 
     if(event.target.innerText=="请吃饭"){
-      actions.fetchEatPosts('EAT_REQUEST');
+      fetchTypes('isFetching');
     } else {
   
     }
@@ -63,13 +63,10 @@ class ChildUi extends React.Component{
   hasData(data){
     const {onCustomClick}=this.props;
     return (<div>
-          <div className="title">请客方式</div>
-          {
-            data.map((item,index)=>{
-              return (<button className="btn" key={index} onClick={onCustomClick.bind(this)}>{item}</button>)
-            })
-          }
-      </div>);
+            <div className="title">请客方式</div>
+            <button className="btn" onClick={onCustomClick.bind(this)}>{data.eatTypes}</button>
+            <button className="btn" onClick={onCustomClick.bind(this)}>{data.drinkTypes}</button>
+        </div>);
   }
   noData(){
     return (<div>

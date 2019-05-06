@@ -2,12 +2,57 @@
 <html>
   <head>
     <title>CORS</title>
-    <script src="./xdomain.js"></script>
-   <script type="text/javascript" async="" src="./other.js"></script>
+    <!-- 开发环境版本，包含了用帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="text/javascript" async="" src="./other.js"></script>
+    <script type="text/javascript" async="" src="./index.js"></script>
+    <style>
+    .test{
+      color:red;
+    }
+    </style>
   </head>
   <body>
-    <div id="root">
-     
+    
+    <div id="app-2">
+      <button @click="onMessage">逆转消息</button>
+      <div :title="message"  :class="classname">
+        {{message}}
+      </div>
+      <input v-model="reversedMessage" />
+      <p :disabled="need?true:false">{{referHtml}}</p>
+      <p v-html="referHtml"></p>
+      <p v-if="seen">现在你看到我了</p>
+      <p v-for="todo of todos">
+        {{todo.index}}-{{todo.text}}
+      </p>
+      <div>{{obj.name}}{{obj.age}}</div>
+      <input v-model="message"> <button @click="addmes">add</button>
+      <ol>
+          <li 
+            is="todo-item"
+            v-for="item in todos"
+            :todo="item"
+            :key="item.index">
+      </li>
+        </ol>
+        <p>{{ foo }}</p>
+        <!-- 这里的 `foo` 不会更新！ -->
+        <button @click="foo = 'baz'">Change it</button>
+        <div :class="classObject">123123</div>
+        <button @click="isActive = !isActive">Change it</button>
+        <a :href="href">{{href}}</a>
+        <select v-model="selected">
+          <option disabled value="">请选择</option>
+          <option>A</option>
+          <option>B</option>
+          <option>C</option>
+        </select>
+        <span>Selected: {{ selected }}</span>
+        <form @submit.prevent="onSubmit">
+          <input type="submit" />
+        </form>
     </div>
+
   </body>
 </html>

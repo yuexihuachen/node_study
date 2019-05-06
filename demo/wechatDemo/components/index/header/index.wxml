@@ -1,0 +1,5 @@
+<view data-name='{{name}}' class='header'>
+<text bindtap="onChildClick">{{innerBack}}</text>
+<slot></slot>
+<text bindtap="onClick">{{home}}</text>
+</view>

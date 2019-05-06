@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "add-list": "plugin://plugin-item1/addlist"
+  }
+}

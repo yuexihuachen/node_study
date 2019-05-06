@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>iScroll demo: simple</title>
+    <script src="./mustache.js"></script>
+</head>
+
+<body>
+ 
+</body>
+<script>
+    let a=Mustache.render('{{#wrapped}}{{name}} is awesome.{{/wrapped}}{{#masterPriceFun}}<p>{{masterPrice}}</p>{{/masterPriceFun}}', {
+        "name": 'sadf',
+        "wrapped": function () {
+            return function (text, render) {
+                return "<b>" + render(text) + "</b>"
+            }
+        },
+        masterPriceFun:function(){
+            return function (text, render) {
+                let name='';
+                if(this.masterPrice && this.masterPrice==0){
+                    name='团长免费';
+                } else if(this.masterPrice && this.masterPrice>0) {
+                    name='团长特价'
+                }
+                return render(name);
+            }
+        }
+    });
+    console.log(a);
+</script>
+
+</html>

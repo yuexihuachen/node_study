@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>anai</title>
+  <style>
+  </style>
+  <script src="./underscore.js"></script>
+</head>
+
+<body>
+
+  <button id="count">点我</button> 
+  <div id="show"></div>
+  <ul id="ul">
+    <li>Firefox</li>
+    <li>Chrome</li>
+    <li>Opera</li>
+    <li>Safari</li>
+    <li>Internet Explorer</li>
+  </ul>
+  <script>
+    // var temp = "hello: <%= name %><%= book %>";
+    // var bdata={name:'wanglong',book:'shushu'};
+    // var matcher = RegExp(/<%=([\s\S]+?)%>/g);
+    // var data=temp.replace(matcher, function(match, escape, interpolate, evaluate, offset) {
+    //    return bdata[escape.trim()];
+    // });
+    // var str=data;
+
+
+      // var element = document.getElementById("ul"); // assuming ul exists
+      // var fragment = document.createDocumentFragment();
+      // // 将原生节点拷贝到fragment
+      // var child;
+      // console.log(child);
+      // while (child = element.firstChild) {
+      //   console.log(child);
+      //   fragment.appendChild(child);
+      // }
+
+
+
+      var fragment = document.createDocumentFragment();
+      var ul = document.getElementById("ul");
+      var li = null;
+      for (var i=0; i < 3; i++){
+          li = document.createElement("li");
+          li.appendChild(document.createTextNode("Item " + (i+1)));
+          fragment.appendChild(li);
+      }
+      ul.appendChild(fragment);
+  </script>
+
+</body>
+
+</html>
