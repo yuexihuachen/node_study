@@ -1,3 +1,2 @@
 test1.js
-test2.js
 test3.js
