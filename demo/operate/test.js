@@ -1490,125 +1490,303 @@ salesOffices.listen('140',fn3);
 
 
 
-let verification={
-    isEmptyFun:function(value,errorMsg){
-        if(value===''){
-            return errorMsg;
-        }
+// let verification={
+//     isEmptyFun:function(value,errorMsg){
+//         if(value===''){
+//             return errorMsg;
+//         }
+//     },
+//     strLengthFun:function(value,min,max,errorMsg){
+//         let strLength=value.length,maxFlag=true;
+//         if(isNaN(max)){
+//             errorMsg=max;
+//         } else {
+//             if(strLength>max){
+//                 maxFlag=false;
+//             }
+//         }
+//         if(!(strLength>=min && maxFlag)){
+//             return errorMsg;
+//         }
+//     },
+//     isMobileFun:function(value,errorMsg){
+//         if(isNaN(value)){
+//             return errorMsg;
+//         }
+//     }
+// }
+
+
+// let Validator=function(){
+//     this.verifications=[];
+// }
+
+// Validator.prototype.add=function(dom,rules){
+//     let _self=this;
+//     rules.forEach((item) => {
+//         let rulesList=item.validName.split(':'),
+//             errorMsg=item.errorMsg;
+
+//         this.verifications.push(function(){
+//             let funName=rulesList.shift();
+//             rulesList.unshift(dom.value);
+//             rulesList.push(errorMsg);
+//             return verification[funName].apply(dom,rulesList);
+//         });
+//     });
+// }
+
+// Validator.prototype.start=function(){
+//     for (var i = 0, validatorFunc; validatorFunc = this.verifications[i++];) {
+//         var errorMsg = validatorFunc(); 
+//         if (errorMsg) {
+//             return errorMsg;
+//         }
+//     }
+// }
+
+// let validataFun=function(){
+//     let validator=new Validator();
+//     validator.add(submit.userName,[{
+//         validName:'isEmptyFun',
+//         errorMsg:'用户名不能为空'
+//     },{
+//         validName:'strLengthFun:10',
+//         errorMsg:'用户名不能少于10位'
+//     }]);
+
+//     validator.add(submit.password,[{
+//         validName:'isEmptyFun',
+//         errorMsg:'密码不能为空'
+//     },{
+//         validName:'strLengthFun:6',
+//         errorMsg:'密码不能少于6位'
+//     }]);
+
+//     validator.add(submit.phoneNumber,[{
+//         validName:'isEmptyFun',
+//         errorMsg:'手机号码不能为空'
+//     },{
+//         validName:'isMobileFun',
+//         errorMsg:'手机号码必须为数字'
+//     },{
+//         validName:'strLengthFun:8:14',
+//         errorMsg:'手机号码不符合规范'
+//     }]);
+
+//     var errorMsg = validator.start();
+
+//     return errorMsg;
+
+// }
+
+
+// submit.onsubmit=function(e){
+//     var validator = validataFun();
+//     console.log(validator)
+// }
+
+// //出行方式  飞机 火车 大巴 自行车
+// let travelMode={
+//     "air":function(peopleNum){
+//         return peopleNum*2000;
+//     },
+//     "train":function(peopleNum){
+//         return peopleNum*600;
+//     },
+//     "bus":function(peopleNum){
+//         return peopleNum*300;
+//     },
+//     "bicycle":function(peopleNum){
+//         return peopleNum*100;
+//     }
+// };
+
+// //出行前的计划
+// let travelReady=function(level,peopleNum){
+//     return travelMode[level](peopleNum);
+// };
+
+// //有钱作飞机
+// console.log(travelReady('air',1)); 
+// //没钱做大巴
+// console.log(travelReady('bus',1));
+
+
+// /**
+//  * 获取web浏览器的基本信息
+//  * @param {String} navigator 有关浏览器的信息
+//  */
+// let WebBrowserVersion=function(na){
+//     this.navigator = na; 
+// };
+
+// WebBrowserVersion.prototype.getVersion=function(){
+//     let version = this.navigator.appVersion.split(' ')[0];
+//     let webInfo={
+//         "浏览器的名称":navigator.appName,
+//         "浏览器的版本":version,
+//         "运行浏览器的操作系统":navigator.platform
+//     };
+//     return webInfo;
+// };
+
+// let webversion=new WebBrowserVersion(navigator);
+
+// let getInstance=function(fn){
+//     let instance;
+//     return function(){
+//         return instance || (instance=fn.apply(this,arguments));
+//     }
+// };
+
+// let versions=getInstance(webversion.getVersion);
+
+// console.log(versions())
+
+//女神
+let nvShen={
+    receiveFlower:function(flower){
+        console.log('收到：',flower)
     },
-    strLengthFun:function(value,min,max,errorMsg){
-        let strLength=value.length,maxFlag=true;
-        if(isNaN(max)){
-            errorMsg=max;
+    listenGoodMood:function(fn,time){
+        //找个女神开心的时候送出去
+        setTimeout(()=>{
+            fn();
+        },time);
+    }
+};
+
+//经纪人
+let jingJiRen={
+    listenZhuiQiuZhe:function(args){
+        let byFlag=false;
+
+        if(args.familyMoney>=1000){
+            byFlag=true;
+        }
+
+        if(!byFlag && args.baoMaFlag){
+            byFlag=true;
+        }
+
+        if(!byFlag && args.age<30){
+            byFlag=true;
+        }
+        //看看满足女神的要求不
+        if(byFlag){
+            jingJiRen.receiveFlower(args.flower);
         } else {
-            if(strLength>max){
-                maxFlag=false;
-            }
-        }
-        if(!(strLength>=min && maxFlag)){
-            return errorMsg;
+            jingJiRen.rejectFlower(args.flower);
         }
     },
-    isMobileFun:function(value,errorMsg){
-        if(isNaN(value)){
-            return errorMsg;
-        }
+    receiveFlower:function(flower){
+        //看看女神心情好不好
+        nvShen.listenGoodMood(function(){
+            nvShen.receiveFlower(flower);
+        },5000);
+    },
+    rejectFlower:function(flower){
+        console.log('拒绝收：',flower)
     }
+};
+
+// //追求者
+// let ZhuiQiuZhe=function(obj){
+//     this.familyMoney=obj.familyMoney;
+//     this.baoMaFlag=obj.baoMaFlag;
+//     this.age=obj.age;
+//     this.sendFlower=obj.sendFlower;
+// }
+
+// ZhuiQiuZhe.prototype.listenZhuiQiuZhe=function(){
+//     //有木有追求女神的欲望
+//     if(this.sendFlower instanceof Function){
+//         this.sendFlower(jingJiRen);
+//     }
+// }
+
+//追求者
+let ZhuiQiuZhe=function(obj){
+    this.familyMoney=obj.familyMoney;
+    this.baoMaFlag=obj.baoMaFlag;
+    this.age=obj.age;
+    this.sendFlower=obj.sendFlower;
+    this.cache=[];
 }
 
-
-let Validator=function(){
-    this.verifications=[];
-}
-
-Validator.prototype.add=function(dom,rules){
-    let _self=this;
-    rules.forEach((item) => {
-        let rulesList=item.validName.split(':'),
-            errorMsg=item.errorMsg;
-
-        this.verifications.push(function(){
-            let funName=rulesList.shift();
-            rulesList.unshift(dom.value);
-            rulesList.push(errorMsg);
-            return verification[funName].apply(dom,rulesList);
+ZhuiQiuZhe.prototype.listenZhuiQiuZhe=function(){
+    //有木有追求女神的欲望
+    if(this.sendFlower instanceof Function){
+        this.cache.push(function(){
+            this.sendFlower(jingJiRen);
         });
-    });
-}
-
-Validator.prototype.start=function(){
-    for (var i = 0, validatorFunc; validatorFunc = this.verifications[i++];) {
-        var errorMsg = validatorFunc(); 
-        if (errorMsg) {
-            return errorMsg;
-        }
     }
 }
 
-let validataFun=function(){
-    let validator=new Validator();
-    validator.add(submit.userName,[{
-        validName:'isEmptyFun',
-        errorMsg:'用户名不能为空'
-    },{
-        validName:'strLengthFun:10',
-        errorMsg:'用户名不能少于10位'
-    }]);
 
-    validator.add(submit.password,[{
-        validName:'isEmptyFun',
-        errorMsg:'密码不能为空'
-    },{
-        validName:'strLengthFun:6',
-        errorMsg:'密码不能少于6位'
-    }]);
-
-    validator.add(submit.phoneNumber,[{
-        validName:'isEmptyFun',
-        errorMsg:'手机号码不能为空'
-    },{
-        validName:'isMobileFun',
-        errorMsg:'手机号码必须为数字'
-    },{
-        validName:'strLengthFun:8:14',
-        errorMsg:'手机号码不符合规范'
-    }]);
-
-    var errorMsg = validator.start();
-
-    return errorMsg;
-
+ZhuiQiuZhe.prototype.startZhuiQiuZhe=function(){
+    //有木有追求女神的欲望
+    if(this.sendFlower instanceof Function){
+        this.cache.forEach(item => {
+            item.apply(this);
+        });
+    }
 }
 
+//一朵鲜艳的🌹
+let Flower =function(){};
 
-submit.onsubmit=function(e){
-    var validator = validataFun();
-    console.log(validator)
-}
-
-//出行方式  飞机 火车 大巴 自行车
-let travelMode={
-    "air":function(peopleNum){
-        return peopleNum*2000;
-    },
-    "train":function(peopleNum){
-        return peopleNum*600;
-    },
-    "bus":function(peopleNum){
-        return peopleNum*300;
-    },
-    "bicycle":function(peopleNum){
-        return peopleNum*100;
+/**
+ * 小明
+ * @pmarm {Number} familyMoney  身价（万）
+ * @pmarm {Boolean} baoMaFlag  宝马车
+ * @pmarm {Number}  age 多大年纪
+ */
+let xiaoming={
+    familyMoney:100,
+    baoMaFlag:false,
+    age:29,
+    sendFlower:function(target){
+        let flower = new Flower();
+        target.listenZhuiQiuZhe({
+            familyMoney:this.familyMoney,
+            baoMaFlag:this.baoMaFlag,
+            age:this.age,
+            flower:flower
+        }); 
     }
 };
 
-//出行前的计划
-let travelReady=function(level,peopleNum){
-    return travelMode[level](peopleNum);
+let xiaoqian={
+    familyMoney:1000,
+    baoMaFlag:false,
+    age:30,
+    sendFlower:function(target){
+        let flower = new Flower();
+        target.listenZhuiQiuZhe({
+            familyMoney:this.familyMoney,
+            baoMaFlag:this.baoMaFlag,
+            age:this.age,
+            flower:flower
+        }); 
+    }
 };
 
-//有钱作飞机
-console.log(travelReady('air',1)); 
-//没钱做大巴
-console.log(travelReady('bus',1));
+let zhuiQiuZhe=new ZhuiQiuZhe(xiaoming);
+let zhuiQiuZhe1=new ZhuiQiuZhe(xiaoqian);
+
+zhuiQiuZhe1.listenZhuiQiuZhe();
+
+/** 
+ * 小明：没有对象
+ * 小钱：没有对象，有钱呀
+ * 追求者：查看对象是否想追求女神
+ * 经纪人：查看是否满足追求女神的条件且观察女神的心情如何
+ * 女神：恭喜你抱得女神
+*/
+
+
+
+
 
