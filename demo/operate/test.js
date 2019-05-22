@@ -1644,52 +1644,77 @@ salesOffices.listen('140',fn3);
 
 // console.log(versions())
 
-//女神
-let nvShen={
-    receiveFlower:function(flower){
-        console.log('收到：',flower)
-    },
-    listenGoodMood:function(fn,time){
-        //找个女神开心的时候送出去
-        setTimeout(()=>{
-            fn();
-        },time);
-    }
-};
+// //女神
+// let nvShen={
+//     receiveFlower:function(flower){
+//         console.log('收到：',flower)
+//     },
+//     listenGoodMood:function(fn,time){
+//         //找个女神开心的时候送出去
+//         setTimeout(()=>{
+//             fn();
+//         },time);
+//     },
+//     bestPorp:function(args){
+//         //最符合要求的 百分制
+//         let count=0;
+//         count+=(args.baoMaFlag?20:1);
+//         count+=((args.age>28 && args.age<35)?20:1);
+//         let mc=args.familyMoney*6e-7;
+//         count+=(mc>60?60:mc);
+//         return count;
+//     }
+// };
 
-//经纪人
-let jingJiRen={
-    listenZhuiQiuZhe:function(args){
-        let byFlag=false;
+// //经纪人
+// let jingJiRen={
+//     listenZhuiQiuZhe:function(args){
+//         let byFlag=false;
 
-        if(args.familyMoney>=1000){
-            byFlag=true;
-        }
+//         if(args.familyMoney>=1000){
+//             byFlag=true;
+//         }
 
-        if(!byFlag && args.baoMaFlag){
-            byFlag=true;
-        }
+//         if(!byFlag && args.baoMaFlag){
+//             byFlag=true;
+//         }
 
-        if(!byFlag && args.age<30){
-            byFlag=true;
-        }
-        //看看满足女神的要求不
-        if(byFlag){
-            jingJiRen.receiveFlower(args.flower);
-        } else {
-            jingJiRen.rejectFlower(args.flower);
-        }
-    },
-    receiveFlower:function(flower){
-        //看看女神心情好不好
-        nvShen.listenGoodMood(function(){
-            nvShen.receiveFlower(flower);
-        },5000);
-    },
-    rejectFlower:function(flower){
-        console.log('拒绝收：',flower)
-    }
-};
+//         if(!byFlag && args.age<30){
+//             byFlag=true;
+//         }
+//         //看看满足女神的要求不
+//         if(byFlag){
+//             jingJiRen.receiveFlower(args.flower);
+//         } else {
+//             jingJiRen.rejectFlower(args.flower);
+//         }
+//     },
+
+//     receiveFlower:function(flower){
+//         //看看女神心情好不好
+//         nvShen.listenGoodMood(function(){
+//             nvShen.receiveFlower(flower);
+//         },5000);
+//     },
+//     rejectFlower:function(flower){
+//         console.log('拒绝收：',flower)
+//     }
+// };
+
+// // //追求者
+// // let ZhuiQiuZhe=function(obj){
+// //     this.familyMoney=obj.familyMoney;
+// //     this.baoMaFlag=obj.baoMaFlag;
+// //     this.age=obj.age;
+// //     this.sendFlower=obj.sendFlower;
+// // }
+
+// // ZhuiQiuZhe.prototype.listenZhuiQiuZhe=function(){
+// //     //有木有追求女神的欲望
+// //     if(this.sendFlower instanceof Function){
+// //         this.sendFlower(jingJiRen);
+// //     }
+// // }
 
 // //追求者
 // let ZhuiQiuZhe=function(obj){
@@ -1706,87 +1731,521 @@ let jingJiRen={
 //     }
 // }
 
-//追求者
-let ZhuiQiuZhe=function(obj){
-    this.familyMoney=obj.familyMoney;
-    this.baoMaFlag=obj.baoMaFlag;
-    this.age=obj.age;
-    this.sendFlower=obj.sendFlower;
-    this.cache=[];
-}
 
-ZhuiQiuZhe.prototype.listenZhuiQiuZhe=function(){
-    //有木有追求女神的欲望
-    if(this.sendFlower instanceof Function){
-        this.cache.push(function(){
-            this.sendFlower(jingJiRen);
-        });
+// //一朵鲜艳的🌹
+// let Flower =function(){};
+
+// /**
+//  * 
+//  * @pmarm {Number} familyMoney  身价（万）
+//  * @pmarm {Boolean} baoMaFlag  宝马车
+//  * @pmarm {Number}  age 多大年纪
+//  */
+// let xiaoming={
+//     familyMoney:100,
+//     baoMaFlag:false,
+//     age:29,
+//     sendFlower:function(target){
+//         let flower = new Flower();
+//         target.listenZhuiQiuZhe({
+//             familyMoney:this.familyMoney,
+//             baoMaFlag:this.baoMaFlag,
+//             age:this.age,
+//             flower:flower
+//         }); 
+//     }
+// };
+
+// let xiaoqian={
+//     familyMoney:1000,
+//     baoMaFlag:false,
+//     age:30,
+//     sendFlower:function(target){
+//         let flower = new Flower();
+//         target.listenZhuiQiuZhe({
+//             familyMoney:this.familyMoney,
+//             baoMaFlag:this.baoMaFlag,
+//             age:this.age,
+//             flower:flower
+//         }); 
+//     }
+// };
+
+// let zhuiQiuZhe=new ZhuiQiuZhe(xiaoming);
+// zhuiQiuZhe.listenZhuiQiuZhe();
+// let zhuiQiuZhe1=new ZhuiQiuZhe(xiaoqian);
+// zhuiQiuZhe1.listenZhuiQiuZhe();
+
+
+
+// /** 
+//  * 小明：没有对象
+//  * 小钱：没有对象，有钱呀
+//  * 追求者：查看对象是否想追求女神
+//  * 经纪人：查看是否满足追求女神的条件且观察女神的心情如何
+//  * 女神：恭喜你抱得女神
+// */
+
+
+
+
+
+// let loadImage =(function(){
+//     var imgNode = document.createElement('img'); 
+//     document.body.appendChild(imgNode);
+//     return {
+//         setSrc:function(src){
+//             imgNode.src = src;
+//         }
+//     }
+// })();
+
+// let proxyImage=(function(){
+//     var img = new Image; 
+//     img.onload = function () {
+//         loadImage.setSrc(this.src);
+//     }
+//     return {
+//         setSrc:function(src){
+//             loadImage.setSrc('file:///Users/test/Applications/test.jpeg');
+//             img.src = src;
+//         }
+//     }
+// })();
+
+// proxyImage.setSrc('https://www.baidu.com/img/superlogo_c4d7df0a003d3db9b65e9ef0fe6da1ec.png');
+
+// /**
+//  * 计算加和
+//  * @param {Number} array 
+//  */
+// let singPlus=function(){
+//     let list=[].slice.call(arguments);
+//     let res=list.reduceRight(function(prev, cur, index, array){
+//         return prev + cur;
+//     });
+//     return res;
+// }
+
+// let singProxyMult=(function(){
+//     let cache={};
+//     return function(){
+//         let args=[].join.call(arguments,',');
+//         if(args in cache){
+//             return cache[args];
+//         }
+//         return cache[args]=singPlus.apply(this,arguments);
+//     }
+// })();
+
+// /**
+//   第二次的结果从缓存里取到
+// */
+// console.log(singProxyMult(1,2,3,4,5));
+// console.log(singProxyMult(1,2,3,4,5));
+
+
+// /**
+//  * 高阶函数动态创建代理 计算乘积 & 加和
+//  * @param {Number} array 
+//  */
+
+// let mult=function(){
+//     let list=[].slice.call(arguments);
+//     let res=list.reduce(function(prev, cur, index, array){
+//         return prev * cur;
+//     });
+//     return res;
+// };
+
+// let plus=function(){
+//     let list=[].slice.call(arguments);
+//     let res=list.reduceRight(function(prev, cur, index, array){
+//         return prev + cur;
+//     });
+//     return res;
+// }
+
+// let proxyCreateFactory=function(fn){
+//     let cache = {};
+//     return function(){
+//         let args = Array.prototype.join.call(arguments, ',');
+//         if (args in cache) {
+//             return cache[args];
+//         }
+//         return cache[args] = fn.apply(this, arguments);
+//     }
+// };
+
+// let proxyPlus=proxyCreateFactory(plus),
+//     proxyMult=proxyCreateFactory(mult);
+
+// /**
+//   第二次的结果从缓存里取到
+// */
+// console.log(proxyPlus(1,2,3,4,5));
+// console.log(proxyPlus(1,2,3,4,5));
+// console.log(proxyMult(1,2,3,4,5));
+// console.log(proxyMult(1,2,3,4,5));
+
+// /**
+//  * 内部迭代器
+//  * @param {Array} args
+//  * @param {Function} callback
+//  **/
+// let each=(args,callback)=>{
+//     for(let i=0;i<args.length;i++){
+//         callback(i,args[i],args);
+//     }
+// }
+
+// each([2,4,6,8,10],function(index,item,array){
+//     console.log(index,item,array)
+// });
+
+// /**
+//  * 内部迭代器实现两个数组比较
+//  **/
+// let compare=(array1,array2)=>{
+//     if(array1.length!==array2.length){
+//         throw new Error('array1和array2不相等');
+//     }
+
+//     each(array1,function(index,item){
+//         if(item!==array2[i]){
+//             throw new Error('array1和array2不相等');
+//         }
+//     });
+
+//     console.log('array1和array2相等')
+// }
+
+
+
+
+
+// /**
+//  *外部迭代器
+//  * @param {Array} args
+//  **/
+// let Iterator=function(list){
+//     let index=0;
+//     return {
+//         next:function(){
+//             return index<list.length?
+//             {value:list[index++],done:false}:
+//             {done:true};
+//         }
+//     }
+// };
+
+// let c1=Iterator([1,2,3,5]);
+
+// let c2=Iterator([1,2,3,7]);
+
+// let compare=function(c1,c2){
+//     let c1next=c1.next();
+//     let c2next=c2.next();
+//     while(!c1next.done && !c2next.done){
+//         if(c1next.value!==c2next.value){
+//             throw new Error('c1 c2不想等');
+//         }
+//         c1next=c1.next();
+//         c2next=c2.next();
+//     }
+// }
+
+// compare(c1,c2);
+
+
+let EventOne=(function(){
+    let _shift=[].shift,
+        _slice=[].slice;
+    //内部迭代器
+    let each = (args, callback) => {
+        for (let i = 0; i < args.length; i++) {
+            callback(i, args[i], args);
+        }
     }
-}
-
-
-ZhuiQiuZhe.prototype.startZhuiQiuZhe=function(){
-    //有木有追求女神的欲望
-    if(this.sendFlower instanceof Function){
-        this.cache.forEach(item => {
-            item.apply(this);
-        });
+    
+    let event={
+        clientCache:[],//存放订阅者列表
+        listen:function(){//订阅者
+            let key=_shift.call(arguments),
+                fn=_shift.call(arguments);
+            //判断当前的订阅的消息列表是否存在
+            if(!this.clientCache[key]){
+                this.clientCache[key]=[];
+            }
+            this.clientCache[key].push(fn);
+        },
+        trigger:function(){//发布者
+            let fns=this.clientCache[_shift.call(arguments)],
+                price=_shift.call(arguments);
+            each(fns,(index,item)=>{
+                item(price);
+            });
+        },
+        remove:function(){//删除订阅信息
+            let key=_shift.call(arguments),
+                fn=_shift.call(arguments),
+                fns=this.clientCache[key];
+            each(fns,function(index,item){
+                if(item===fn){
+                    fns.splice(index,1);
+                }
+            });
+        }
     }
-}
 
-//一朵鲜艳的🌹
-let Flower =function(){};
+    let initEvent=function(obj){
+        for (let i in event){
+            obj[i] = event[i];
+        }
+        return obj;
+    };
+        
+    return initEvent;
 
-/**
- * 小明
- * @pmarm {Number} familyMoney  身价（万）
- * @pmarm {Boolean} baoMaFlag  宝马车
- * @pmarm {Number}  age 多大年纪
- */
-let xiaoming={
-    familyMoney:100,
-    baoMaFlag:false,
-    age:29,
-    sendFlower:function(target){
-        let flower = new Flower();
-        target.listenZhuiQiuZhe({
-            familyMoney:this.familyMoney,
-            baoMaFlag:this.baoMaFlag,
-            age:this.age,
-            flower:flower
-        }); 
+})();
+
+// let salesOffices={};
+// let event=EventOne(salesOffices);
+// event.listen("100",fn1=function(price){
+//     console.log('100平的房子价格：',price);
+// });
+// event.listen("100",fn2=function(price){
+//     console.log('100平的房子价格：',price);
+// });
+// event.listen("100",fn3=function(price){
+//     console.log('100平的房子价格：',price);
+// });
+// event.remove('100',fn3);
+// event.trigger("100",1000000);
+
+let EventTest=(function(){
+    let _shift=Array.prototype.shift,
+        _unshift=Array.prototype.unshift,
+        _slice=Array.prototype.slice,
+        _trigger,_listen,_remove,
+        namespaceCache={},
+        each=function(stack,fn){
+            stack.forEach((item,index) => {
+                fn.apply(item,arguments)
+            });
+        };
+
+        _trigger=function(key,value,fns){
+            if(!fns || fns.length===0){
+                return ;
+            }
+            each(fns,function(){
+                this.call(this,value);
+            })
+        };
+        _listen=function(key,fn,clientsCache){
+            if(!clientsCache[key]){
+                clientsCache[key]=[];
+            }
+            clientsCache[key].push(fn);
+        };
+        _remove=function(key,fn,fns,clientsCache){
+            if(!clientsCache[key]){
+                return ;
+            } else {
+                each(fns,function(item,index){
+                    if(item===fn){
+                        fns.splice(index,1);
+                    }
+                });
+            }
+        };
+
+
+    let _create=function(){
+        let namespace=_shift.call(arguments) || 'defaultNameSpace',
+            clientsCache=[],
+            offlineStack=[];
+
+        let ret={
+            trigger:function(){
+                let key=_shift.call(arguments);
+                    fns=clientsCache[key];
+                    value=_shift.call(arguments);
+                
+                if(!fns || fns.length===0){
+
+                    if(!offlineStack[key]){
+                        offlineStack[key]=[];
+                    }
+                    offlineStack[key].push(function(){
+                        _trigger.apply(this,arguments);
+                    });
+                    return ;
+                }
+
+                return _trigger.call(this,key,value,fns);
+            },
+            listen:function(){
+                let key=_shift.call(arguments);
+                    fn=_shift.call(arguments);
+                _listen.call(this,key,fn,clientsCache);
+                if(offlineStack[key]){
+                    offlineStack[key][0].call(this,key,value,clientsCache[key]);
+                    delete offlineStack[key];
+                }
+            },
+            remove:function(){
+                let key=_shift.call(arguments),
+                    fn=_shift.call(arguments),
+                    fns=clientsCache[key];
+                _remove.call(this,key,fn,fns,clientsCache);
+            }
+        }
+
+        return namespaceCache[namespace]?namespaceCache[namespace]:namespaceCache[namespace]=ret;
+
     }
-};
 
-let xiaoqian={
-    familyMoney:1000,
-    baoMaFlag:false,
-    age:30,
-    sendFlower:function(target){
-        let flower = new Flower();
-        target.listenZhuiQiuZhe({
-            familyMoney:this.familyMoney,
-            baoMaFlag:this.baoMaFlag,
-            age:this.age,
-            flower:flower
-        }); 
+    return {
+        create:_create,
+        trigger:function(){
+            var event=this.create();
+            return event.trigger.apply(this,arguments);
+        },
+        listen:function(){
+            var event=this.create();
+            return event.listen.apply(this,arguments);
+        },
+        remove:function(){
+            var event=this.create();
+            return event.remove.apply(this,arguments);
+        }
     }
-};
 
-let zhuiQiuZhe=new ZhuiQiuZhe(xiaoming);
-let zhuiQiuZhe1=new ZhuiQiuZhe(xiaoqian);
+})();
 
-zhuiQiuZhe1.listenZhuiQiuZhe();
+let Event=(function(){
+    let _shift = [].shift,
+        _slice = [].slice,
+        namespaceCache={},
+        each = (args, callback) => {//内部迭代器
+            for (let i = 0; i < args.length; i++) {
+                callback(i, args[i], args);
+            }
+        },
+        _listen=function(){
+            let key=_shift.call(arguments),
+                fn=_shift.call(arguments);
+            //判断当前的订阅的消息列表是否存在
+            if(!this.clientCache[key]){
+                this.clientCache[key]=[];
+            }
+            this.clientCache[key].push(fn);
+            if(this.offlineStack && this.offlineStack.length){
+                each(this.offlineStack,function(index,item){
+                    item();
+                });
+            }
+        },
+        _trigger=function(){
+            let key=_shift.call(arguments),
+                fns=this.clientCache[key],
+                price=_shift.call(arguments);
+        
+            each(fns,(index,item)=>{
+                item(price);
+            });
+        },
+        _remove=function(){
+            let key=_shift.call(arguments),
+                fn=_shift.call(arguments),
+                fns=this.clientCache[key];
+            if(!fns){
+                return ;
+            } else {
+                each(fns,function(index,item){
+                    if(item===fn){
+                        fns.splice(index,1);
+                    }
+                });
+            }
+        }
+    
+    let create=function(){
+        let namespace=_shift.call(arguments) || 'defaultNameSpace';
 
-/** 
- * 小明：没有对象
- * 小钱：没有对象，有钱呀
- * 追求者：查看对象是否想追求女神
- * 经纪人：查看是否满足追求女神的条件且观察女神的心情如何
- * 女神：恭喜你抱得女神
-*/
+        let event={
+            clientCache:[],//存放订阅者列表
+            offlineStack:[],//离线消息
+            listen:function(){//订阅者
+                _listen.apply(this,arguments);
+                this.offlineStack=[];
+            },
+            trigger:function(){//发布者
+                let _self=this,
+                args=arguments,
+                fns=this.clientCache[args[0]];
+            
+                if(!fns){
+                    this.offlineStack.push(function(){
+                        _trigger.apply(_self,args);
+                    });
+                    return;
+                }
+                _trigger.apply(this,arguments);
+            },
+            remove:function(){//删除订阅信息
+                _remove.apply(this,arguments);
+            }
+        };
 
+        return namespaceCache[namespace] ? 
+               namespaceCache[namespace] : 
+               namespaceCache[namespace] = event;
 
+    }
+        
+    return {
+        create:function(){
+            return create.apply(this,arguments);
+        },
+        listen:function(){
+            let event=this.create();
+            return event.listen.apply(event,arguments);
+        },
+        trigger:function(){
+            let event=this.create();
+            return event.trigger.apply(event,arguments);
+        },
+        remove:function(){
+            let event=this.create();
+            return event.remove.apply(event,arguments);
+        }
+    };
 
+})();
 
+let event=Event.create('test');
+event.listen("100",fn1=function(price){
+    console.log('fn1 100平的房子价格：',price);
+});
+event.listen("100",fn2=function(price){
+    console.log('fn2 100平的房子价格：',price);
+});
+event.listen("88",fn3=function(price){
+    console.log('fn3 88平的房子价格：',price);
+});
+event.remove('100',fn2);
+let event1=Event.create();
+event1.listen("88",fn4=function(price){
+    console.log('fn4 88平的房子价格：',price);
+});
+event.trigger("100",1000000);
+event.trigger("88",880000);
 
+event1.trigger('150',1500000);
+
+event1.listen("150",fn5=function(price){
+    console.log('fn5 150平的房子价格：',price);
+});
