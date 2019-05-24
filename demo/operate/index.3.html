@@ -74,6 +74,105 @@
     svg{
       display: none;
     }
+
+
+     
+  .pin-tuan-board {
+    position: fixed;
+    z-index: 1100;
+    right: 10px;
+    bottom: 3.36rem;
+    padding: 0;
+    text-align: right
+}
+
+.pin-tuan-board .pin-tuan-content {
+    display: none;
+    float: left;
+    position: relative;
+    right: -42px;
+    color: #fff;
+    border-radius: 21px;
+    font-size: .32rem;
+    background-color: #ff8c3a;
+    height: 42px;
+    padding-right: 42px;
+    z-index: 1000;
+    text-align: left;
+    line-height: 42px;
+
+}
+
+
+.pin-tuan-board .animated_s{
+    display: block;
+    width: 211px;
+    animation:animated_swiper 5s 1;
+    -moz-animation:animated_swiper 5s 1;
+    -webkit-animation:animated_swiper 5s1;
+    -o-animation:animated_swiper 5s 1;
+}
+
+.pin-tuan-board .pin-tuan-content .pin-tuan-price {
+    display: inline-block;
+    margin-left: 12px;
+    height: 42px
+}
+
+.pin-tuan-board .pin-tuan-content .pin-tuan-price .pin-price {
+    font-size: .4267rem
+}
+
+.pin-tuan-board .pin-tuan-content .line {
+    display: inline-block;
+    width: 1px;
+    height: 18px;
+    border-left: 1px dotted #fff;
+    position: relative;
+    top: 4px;
+    margin: 0 9px
+}
+
+.pin-tuan-board .pin-tuan-content .go-to-pin-tuan {
+    display: inline-block;
+    height: 42px;
+    position: relative;
+    top: -2px;
+    margin-right: 6px
+}
+
+.pin-tuan-board .pin-tuan-content .go-to-pin-tuan i {
+    font-size: 10px
+}
+
+.pin-tuan-board .pin-img {
+    position: relative;
+    z-index: 1001;
+    width: 42px;
+    height: 42px;
+    display: block
+}
+
+@media only screen and (device-width: 375px) and (device-height:812px) and (-webkit-min-device-pixel-ratio:3) {
+    .go-to-top-area {
+        bottom:2.8267rem
+    }
+
+    .pin-tuan-board {
+        bottom: 4.2667rem
+    }
+}
+
+  @keyframes animated_swiper
+	{
+    0%	{width: 0;}
+    100% {width:211px;}
+	}
+
+
+
+
+
   </style>
   <!-- <link href="./index.css" rel="stylesheet" > -->
 </head>
@@ -166,6 +265,20 @@
     </form>
 </div>
 
+<div class="pin-tuan-board">
+    <div class="pin-tuan-content">
+        <div class="pin-tuan-price">
+            <span>拼团价 ¥ </span>
+            <span class="pin-price">28888</span>
+        </div>
+        <div class="line"></div>
+        <div class="go-to-pin-tuan">
+            <span>去拼团</span>
+            <i class="hui-icon hui-icon-carat-r"></i>
+        </div>
+    </div>
+    <img class="pin-img" src="https://n1image.hjfile.cn/zhuanti/2019/05/23/06e9abff448d8ae6464b57568d57ebaa.png" alt="" />
+</div>
 
 <script src="./test.js"></script>
 </body>
