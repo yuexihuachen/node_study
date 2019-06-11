@@ -12,6 +12,8 @@ let tpl=`<!DOCTYPE html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>一次性餐用手套 - 网易严选</title>
+    <script crossorigin src="https://zeptojs.com/zepto.js" ></script>
+    <link rel="stylesheet" href="http://local.mc.hujiang.com:8080/common/bundle.css">
     <meta name="viewport"
         content="initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no viewport-fit=cover">
     <style>

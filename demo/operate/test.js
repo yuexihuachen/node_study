@@ -2023,229 +2023,233 @@ let EventOne=(function(){
 // event.remove('100',fn3);
 // event.trigger("100",1000000);
 
-let EventTest=(function(){
-    let _shift=Array.prototype.shift,
-        _unshift=Array.prototype.unshift,
-        _slice=Array.prototype.slice,
-        _trigger,_listen,_remove,
-        namespaceCache={},
-        each=function(stack,fn){
-            stack.forEach((item,index) => {
-                fn.apply(item,arguments)
-            });
-        };
+/**************** 自定义发布订阅者模式 *********************/
+// let EventTest=(function(){
+//     let _shift=Array.prototype.shift,
+//         _unshift=Array.prototype.unshift,
+//         _slice=Array.prototype.slice,
+//         _trigger,_listen,_remove,
+//         namespaceCache={},
+//         each=function(stack,fn){
+//             stack.forEach((item,index) => {
+//                 fn.apply(item,arguments)
+//             });
+//         };
 
-        _trigger=function(key,value,fns){
-            if(!fns || fns.length===0){
-                return ;
-            }
-            each(fns,function(){
-                this.call(this,value);
-            })
-        };
-        _listen=function(key,fn,clientsCache){
-            if(!clientsCache[key]){
-                clientsCache[key]=[];
-            }
-            clientsCache[key].push(fn);
-        };
-        _remove=function(key,fn,fns,clientsCache){
-            if(!clientsCache[key]){
-                return ;
-            } else {
-                each(fns,function(item,index){
-                    if(item===fn){
-                        fns.splice(index,1);
-                    }
-                });
-            }
-        };
+//         _trigger=function(key,value,fns){
+//             if(!fns || fns.length===0){
+//                 return ;
+//             }
+//             each(fns,function(){
+//                 this.call(this,value);
+//             })
+//         };
+//         _listen=function(key,fn,clientsCache){
+//             if(!clientsCache[key]){
+//                 clientsCache[key]=[];
+//             }
+//             clientsCache[key].push(fn);
+//         };
+//         _remove=function(key,fn,fns,clientsCache){
+//             if(!clientsCache[key]){
+//                 return ;
+//             } else {
+//                 each(fns,function(item,index){
+//                     if(item===fn){
+//                         fns.splice(index,1);
+//                     }
+//                 });
+//             }
+//         };
 
 
-    let _create=function(){
-        let namespace=_shift.call(arguments) || 'defaultNameSpace',
-            clientsCache=[],
-            offlineStack=[];
+//     let _create=function(){
+//         let namespace=_shift.call(arguments) || 'defaultNameSpace',
+//             clientsCache=[],
+//             offlineStack=[];
 
-        let ret={
-            trigger:function(){
-                let key=_shift.call(arguments);
-                    fns=clientsCache[key];
-                    value=_shift.call(arguments);
+//         let ret={
+//             trigger:function(){
+//                 let key=_shift.call(arguments);
+//                     fns=clientsCache[key];
+//                     value=_shift.call(arguments);
                 
-                if(!fns || fns.length===0){
+//                 if(!fns || fns.length===0){
 
-                    if(!offlineStack[key]){
-                        offlineStack[key]=[];
-                    }
-                    offlineStack[key].push(function(){
-                        _trigger.apply(this,arguments);
-                    });
-                    return ;
-                }
+//                     if(!offlineStack[key]){
+//                         offlineStack[key]=[];
+//                     }
+//                     offlineStack[key].push(function(){
+//                         _trigger.apply(this,arguments);
+//                     });
+//                     return ;
+//                 }
 
-                return _trigger.call(this,key,value,fns);
-            },
-            listen:function(){
-                let key=_shift.call(arguments);
-                    fn=_shift.call(arguments);
-                _listen.call(this,key,fn,clientsCache);
-                if(offlineStack[key]){
-                    offlineStack[key][0].call(this,key,value,clientsCache[key]);
-                    delete offlineStack[key];
-                }
-            },
-            remove:function(){
-                let key=_shift.call(arguments),
-                    fn=_shift.call(arguments),
-                    fns=clientsCache[key];
-                _remove.call(this,key,fn,fns,clientsCache);
-            }
-        }
+//                 return _trigger.call(this,key,value,fns);
+//             },
+//             listen:function(){
+//                 let key=_shift.call(arguments);
+//                     fn=_shift.call(arguments);
+//                 _listen.call(this,key,fn,clientsCache);
+//                 if(offlineStack[key]){
+//                     offlineStack[key][0].call(this,key,value,clientsCache[key]);
+//                     delete offlineStack[key];
+//                 }
+//             },
+//             remove:function(){
+//                 let key=_shift.call(arguments),
+//                     fn=_shift.call(arguments),
+//                     fns=clientsCache[key];
+//                 _remove.call(this,key,fn,fns,clientsCache);
+//             }
+//         }
 
-        return namespaceCache[namespace]?namespaceCache[namespace]:namespaceCache[namespace]=ret;
+//         return namespaceCache[namespace]?namespaceCache[namespace]:namespaceCache[namespace]=ret;
 
-    }
+//     }
 
-    return {
-        create:_create,
-        trigger:function(){
-            var event=this.create();
-            return event.trigger.apply(this,arguments);
-        },
-        listen:function(){
-            var event=this.create();
-            return event.listen.apply(this,arguments);
-        },
-        remove:function(){
-            var event=this.create();
-            return event.remove.apply(this,arguments);
-        }
-    }
+//     return {
+//         create:_create,
+//         trigger:function(){
+//             var event=this.create();
+//             return event.trigger.apply(this,arguments);
+//         },
+//         listen:function(){
+//             var event=this.create();
+//             return event.listen.apply(this,arguments);
+//         },
+//         remove:function(){
+//             var event=this.create();
+//             return event.remove.apply(this,arguments);
+//         }
+//     }
 
-})();
+// })();
 
-let Event=(function(){
-    let _shift = [].shift,
-        _slice = [].slice,
-        namespaceCache={},
-        each = (args, callback) => {//内部迭代器
-            for (let i = 0; i < args.length; i++) {
-                callback(i, args[i], args);
-            }
-        },
-        _listen=function(){
-            let key=_shift.call(arguments),
-                fn=_shift.call(arguments);
-            //判断当前的订阅的消息列表是否存在
-            if(!this.clientCache[key]){
-                this.clientCache[key]=[];
-            }
-            this.clientCache[key].push(fn);
-            if(this.offlineStack && this.offlineStack.length){
-                each(this.offlineStack,function(index,item){
-                    item();
-                });
-            }
-        },
-        _trigger=function(){
-            let key=_shift.call(arguments),
-                fns=this.clientCache[key],
-                price=_shift.call(arguments);
+// let Event=(function(){
+//     let _shift = [].shift,
+//         _slice = [].slice,
+//         namespaceCache={},
+//         each = (args, callback) => {//内部迭代器
+//             for (let i = 0; i < args.length; i++) {
+//                 callback(i, args[i], args);
+//             }
+//         },
+//         _listen=function(){
+//             let key=_shift.call(arguments),
+//                 fn=_shift.call(arguments);
+//             //判断当前的订阅的消息列表是否存在
+//             if(!this.clientCache[key]){
+//                 this.clientCache[key]=[];
+//             }
+//             this.clientCache[key].push(fn);
+//             if(this.offlineStack && this.offlineStack.length){
+//                 each(this.offlineStack,function(index,item){
+//                     item();
+//                 });
+//             }
+//         },
+//         _trigger=function(){
+//             let key=_shift.call(arguments),
+//                 fns=this.clientCache[key],
+//                 price=_shift.call(arguments);
         
-            each(fns,(index,item)=>{
-                item(price);
-            });
-        },
-        _remove=function(){
-            let key=_shift.call(arguments),
-                fn=_shift.call(arguments),
-                fns=this.clientCache[key];
-            if(!fns){
-                return ;
-            } else {
-                each(fns,function(index,item){
-                    if(item===fn){
-                        fns.splice(index,1);
-                    }
-                });
-            }
-        }
+//             each(fns,(index,item)=>{
+//                 item(price);
+//             });
+//         },
+//         _remove=function(){
+//             let key=_shift.call(arguments),
+//                 fn=_shift.call(arguments),
+//                 fns=this.clientCache[key];
+//             if(!fns){
+//                 return ;
+//             } else {
+//                 each(fns,function(index,item){
+//                     if(item===fn){
+//                         fns.splice(index,1);
+//                     }
+//                 });
+//             }
+//         }
     
-    let create=function(){
-        let namespace=_shift.call(arguments) || 'defaultNameSpace';
+//     let create=function(){
+//         let namespace=_shift.call(arguments) || 'defaultNameSpace';
 
-        let event={
-            clientCache:[],//存放订阅者列表
-            offlineStack:[],//离线消息
-            listen:function(){//订阅者
-                _listen.apply(this,arguments);
-                this.offlineStack=[];
-            },
-            trigger:function(){//发布者
-                let _self=this,
-                args=arguments,
-                fns=this.clientCache[args[0]];
+//         let event={
+//             clientCache:[],//存放订阅者列表
+//             offlineStack:[],//离线消息
+//             listen:function(){//订阅者
+//                 _listen.apply(this,arguments);
+//                 this.offlineStack=[];
+//             },
+//             trigger:function(){//发布者
+//                 let _self=this,
+//                 args=arguments,
+//                 fns=this.clientCache[args[0]];
             
-                if(!fns){
-                    this.offlineStack.push(function(){
-                        _trigger.apply(_self,args);
-                    });
-                    return;
-                }
-                _trigger.apply(this,arguments);
-            },
-            remove:function(){//删除订阅信息
-                _remove.apply(this,arguments);
-            }
-        };
+//                 if(!fns){
+//                     this.offlineStack.push(function(){
+//                         _trigger.apply(_self,args);
+//                     });
+//                     return;
+//                 }
+//                 _trigger.apply(this,arguments);
+//             },
+//             remove:function(){//删除订阅信息
+//                 _remove.apply(this,arguments);
+//             }
+//         };
 
-        return namespaceCache[namespace] ? 
-               namespaceCache[namespace] : 
-               namespaceCache[namespace] = event;
+//         return namespaceCache[namespace] ? 
+//                namespaceCache[namespace] : 
+//                namespaceCache[namespace] = event;
 
-    }
+//     }
         
-    return {
-        create:function(){
-            return create.apply(this,arguments);
-        },
-        listen:function(){
-            let event=this.create();
-            return event.listen.apply(event,arguments);
-        },
-        trigger:function(){
-            let event=this.create();
-            return event.trigger.apply(event,arguments);
-        },
-        remove:function(){
-            let event=this.create();
-            return event.remove.apply(event,arguments);
-        }
-    };
+//     return {
+//         create:function(){
+//             return create.apply(this,arguments);
+//         },
+//         listen:function(){
+//             let event=this.create();
+//             return event.listen.apply(event,arguments);
+//         },
+//         trigger:function(){
+//             let event=this.create();
+//             return event.trigger.apply(event,arguments);
+//         },
+//         remove:function(){
+//             let event=this.create();
+//             return event.remove.apply(event,arguments);
+//         }
+//     };
 
-})();
+// })();
 
-let event=Event.create('test');
-event.listen("100",fn1=function(price){
-    console.log('fn1 100平的房子价格：',price);
-});
-event.listen("100",fn2=function(price){
-    console.log('fn2 100平的房子价格：',price);
-});
-event.listen("88",fn3=function(price){
-    console.log('fn3 88平的房子价格：',price);
-});
-event.remove('100',fn2);
-let event1=Event.create();
-event1.listen("88",fn4=function(price){
-    console.log('fn4 88平的房子价格：',price);
-});
-event.trigger("100",1000000);
-event.trigger("88",880000);
+// let event=Event.create('test');
+// event.listen("100",fn1=function(price){
+//     console.log('fn1 100平的房子价格：',price);
+// });
+// event.listen("100",fn2=function(price){
+//     console.log('fn2 100平的房子价格：',price);
+// });
+// event.listen("88",fn3=function(price){
+//     console.log('fn3 88平的房子价格：',price);
+// });
+// event.remove('100',fn2);
+// let event1=Event.create();
+// event1.listen("88",fn4=function(price){
+//     console.log('fn4 88平的房子价格：',price);
+// });
+// event.trigger("100",1000000);
+// event.trigger("88",880000);
 
-event1.trigger('150',1500000);
+// event1.trigger('150',1500000);
 
-event1.listen("150",fn5=function(price){
-    console.log('fn5 150平的房子价格：',price);
-});
+// event1.listen("150",fn5=function(price){
+//     console.log('fn5 150平的房子价格：',price);
+// });
+
+
+
