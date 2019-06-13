@@ -1958,56 +1958,56 @@ salesOffices.listen('140',fn3);
 // compare(c1,c2);
 
 
-let EventOne=(function(){
-    let _shift=[].shift,
-        _slice=[].slice;
-    //内部迭代器
-    let each = (args, callback) => {
-        for (let i = 0; i < args.length; i++) {
-            callback(i, args[i], args);
-        }
-    }
+// let EventOne=(function(){
+//     let _shift=[].shift,
+//         _slice=[].slice;
+//     //内部迭代器
+//     let each = (args, callback) => {
+//         for (let i = 0; i < args.length; i++) {
+//             callback(i, args[i], args);
+//         }
+//     }
     
-    let event={
-        clientCache:[],//存放订阅者列表
-        listen:function(){//订阅者
-            let key=_shift.call(arguments),
-                fn=_shift.call(arguments);
-            //判断当前的订阅的消息列表是否存在
-            if(!this.clientCache[key]){
-                this.clientCache[key]=[];
-            }
-            this.clientCache[key].push(fn);
-        },
-        trigger:function(){//发布者
-            let fns=this.clientCache[_shift.call(arguments)],
-                price=_shift.call(arguments);
-            each(fns,(index,item)=>{
-                item(price);
-            });
-        },
-        remove:function(){//删除订阅信息
-            let key=_shift.call(arguments),
-                fn=_shift.call(arguments),
-                fns=this.clientCache[key];
-            each(fns,function(index,item){
-                if(item===fn){
-                    fns.splice(index,1);
-                }
-            });
-        }
-    }
+//     let event={
+//         clientCache:[],//存放订阅者列表
+//         listen:function(){//订阅者
+//             let key=_shift.call(arguments),
+//                 fn=_shift.call(arguments);
+//             //判断当前的订阅的消息列表是否存在
+//             if(!this.clientCache[key]){
+//                 this.clientCache[key]=[];
+//             }
+//             this.clientCache[key].push(fn);
+//         },
+//         trigger:function(){//发布者
+//             let fns=this.clientCache[_shift.call(arguments)],
+//                 price=_shift.call(arguments);
+//             each(fns,(index,item)=>{
+//                 item(price);
+//             });
+//         },
+//         remove:function(){//删除订阅信息
+//             let key=_shift.call(arguments),
+//                 fn=_shift.call(arguments),
+//                 fns=this.clientCache[key];
+//             each(fns,function(index,item){
+//                 if(item===fn){
+//                     fns.splice(index,1);
+//                 }
+//             });
+//         }
+//     }
 
-    let initEvent=function(obj){
-        for (let i in event){
-            obj[i] = event[i];
-        }
-        return obj;
-    };
+//     let initEvent=function(obj){
+//         for (let i in event){
+//             obj[i] = event[i];
+//         }
+//         return obj;
+//     };
         
-    return initEvent;
+//     return initEvent;
 
-})();
+// })();
 
 // let salesOffices={};
 // let event=EventOne(salesOffices);
@@ -2250,6 +2250,5 @@ let EventOne=(function(){
 // event1.listen("150",fn5=function(price){
 //     console.log('fn5 150平的房子价格：',price);
 // });
-
 
 
