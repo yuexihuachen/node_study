@@ -27,8 +27,24 @@ function thunkify(fn){
 function f(a, b, callback){
   var sum = a + b;
   callback(sum);
-  callback(sum);
 }
 
 var ft = thunkify(f);
-ft(1, 2)(console.log); 
+
+ function * gen(){
+  var r1 = yield ft(1,2);
+  var r2 = yield ft(3,4);
+};
+
+let g=gen();
+
+let r1=g.next();
+
+r1.value(function(args){
+  console.log(args)
+  var r2 = g.next();
+  r2.value(function(args){
+    console.log(args)
+    g.next();
+  });
+});

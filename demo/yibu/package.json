@@ -8,6 +8,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "consolidate": "^0.15.1",
     "express": "^4.16.4",
     "fs": "^0.0.1-security",
     "thunkify": "^2.1.2"

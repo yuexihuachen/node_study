@@ -1,5 +1,5 @@
-function log(){
-    console.log.apply(this,arguments)
+function log() {
+    console.log.apply(this, arguments)
 }
 
 
@@ -1212,7 +1212,7 @@ salesOffices.listen('140',fn3);
 //                 let key=_shift.call(arguments);
 //                     fns=clientsCache[key];
 //                     value=_shift.call(arguments);
-                
+
 //                 if(!fns || fns.length===0){
 
 //                     if(!offlineStack[key]){
@@ -1386,7 +1386,7 @@ salesOffices.listen('140',fn3);
 //                 item.win();
 //             });
 //         }
-    
+
 //     }
 // }
 
@@ -1967,7 +1967,7 @@ salesOffices.listen('140',fn3);
 //             callback(i, args[i], args);
 //         }
 //     }
-    
+
 //     let event={
 //         clientCache:[],//存放订阅者列表
 //         listen:function(){//订阅者
@@ -2004,7 +2004,7 @@ salesOffices.listen('140',fn3);
 //         }
 //         return obj;
 //     };
-        
+
 //     return initEvent;
 
 // })();
@@ -2073,7 +2073,7 @@ salesOffices.listen('140',fn3);
 //                 let key=_shift.call(arguments);
 //                     fns=clientsCache[key];
 //                     value=_shift.call(arguments);
-                
+
 //                 if(!fns || fns.length===0){
 
 //                     if(!offlineStack[key]){
@@ -2153,7 +2153,7 @@ salesOffices.listen('140',fn3);
 //             let key=_shift.call(arguments),
 //                 fns=this.clientCache[key],
 //                 price=_shift.call(arguments);
-        
+
 //             each(fns,(index,item)=>{
 //                 item(price);
 //             });
@@ -2172,7 +2172,7 @@ salesOffices.listen('140',fn3);
 //                 });
 //             }
 //         }
-    
+
 //     let create=function(){
 //         let namespace=_shift.call(arguments) || 'defaultNameSpace';
 
@@ -2187,7 +2187,7 @@ salesOffices.listen('140',fn3);
 //                 let _self=this,
 //                 args=arguments,
 //                 fns=this.clientCache[args[0]];
-            
+
 //                 if(!fns){
 //                     this.offlineStack.push(function(){
 //                         _trigger.apply(_self,args);
@@ -2206,7 +2206,7 @@ salesOffices.listen('140',fn3);
 //                namespaceCache[namespace] = event;
 
 //     }
-        
+
 //     return {
 //         create:function(){
 //             return create.apply(this,arguments);
@@ -2252,3 +2252,13 @@ salesOffices.listen('140',fn3);
 // });
 
 
+// let obj={
+//     name:'wanglong',
+//     age:30
+// }
+
+// let headerHtml='<div><span><% name %></span><% name %><% age %></div>'.replace(/<%([\s\S]+?)%>/g, function(match,escape) {
+//     return obj[escape.trim()];
+// });
+
+// log(headerHtml)
